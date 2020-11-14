@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 存于shp文件中的值 -->
+    <string name="SHP_NAME" translatable="false">MY_DATA</string>
+    <string name="COOKIE_SHP_NAME" translatable="false">MY_COOKIE</string>
+    <!--帐号密码-->
+    <string name="STUDENT_ID" translatable="false">STUDENT_ID</string>
+    <string name="PASSWORD" translatable="false">PASSWORD</string>
+    <!--储存cookie值的key-->
+    <string name="COOKIE_KEY" translatable="false">COOKIE</string>
+    <!--是否自动登录、保存密码的key-->
+    <string name="IS_SAVE" translatable="false">IS_SAVE</string>
+    <string name="IS_AUTO" translatable="false">IS_AUTO</string>
+    <!--保存课程表版本值的key-->
+    <string name="VERSION_KEY" translatable="false">VERSION</string>
+    <!--保存课程表版本值的key-->
+    <string name="IS_SHOW_ALL_KEY" translatable="false">SHOW_ALL</string>
+    <!--来自ShowCurriculumActivity的值-->
+    <string name="FROM_ACTION" translatable="false">FROM_scACTION</string>
+    <!-- 存于本地文件的文件名 -->
+    <string name="FILE_NAME" translatable="false">xskb</string>
+    <!--最大周数值的key-->
+    <string name="MAX_WEEK_KEY" translatable="false">MAX_WEEK</string>
+    <!--有多少课程种类的key-->
+    <string name="COUNT_COURSE_KEY" translatable="false">COUNT_COURSE</string>
+    <!--是否保存课表信息在本地的key-->
+    <string name="IS_SAVE_COURSE_KEY" translatable="false">SAVE_COURSE</string>
+    <!-- 默认值 -->
+    <string name="defStringValue" translatable="false"/>
+    <bool name="defBool">false</bool>
+    <!--Image的说明-->
+    <string name="switchImage" translatable="false">switchImage</string>
+    <string name="switchAllImage" translatable="false">switchAllImage</string>
+    <string name="upDataImage" translatable="false">upDataImage</string>
+    <string name="aboutImage" translatable="false">aboutImage</string>
+    <string name="aboutActivityImage" translatable="false">icon</string>
+    <!--cardViewColor-->
+    <array name="recyclerItemColors">
+        <item>#FBB496</item>
+        <item>#FC7A82</item>
+        <item>#E1F4DB</item>
+        <item>#8AC6D0</item>
+        <item>#3B375F</item>
+        <item>#184C42</item>
+        <item>#3B706E</item>
+        <item>#D3B03F</item>
+        <item>#93C088</item>
+        <item>#A9A9F0</item>
+        <item>#62C7B5</item>
+        <item>#8A4F80</item>
+        <item>#FFD7E1</item>
+        <item>#AF6E72</item>
+        <item>#1F5082</item>
+        <item>#AD4D32</item>
+        <item>#F6C555</item>
+    </array>
+    <array name="recyclerTextColors">
+        <item>#967364</item>
+        <item>#98575b</item>
+        <item>#8a9487</item>
+        <item>#5f7d82</item>
+        <item>#9d9baf</item>
+        <item>#8ca6a1</item>
+        <item>#9db8b7</item>
+        <item>#837239</item>
+        <item>#637a5e</item>
+        <item>#6e6e92</item>
+        <item>#4b7d74</item>
+        <item>#c5a7c0</item>
+        <item>#99858a</item>
+        <item>#715153</item>
+        <item>#8fa8c1</item>
+        <item>#d6a699</item>
+        <item>#957c44</item>
+    </array>
+</resources>

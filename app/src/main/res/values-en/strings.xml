@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SimpleCurriculum</string>
+    <string name="Login">Login</string>
+    <string name="Student_ID">student id</string>
+    <string name="PassWord">password</string>
+    <string name="SavePassword">save</string>
+    <string name="AutoLogin">auto</string>
+    <string name="SwitchVersion">show teacher</string>
+    <string name="About">about</string>
+    <string name="UpData">updata</string>
+    <string name="SwitchAll">show all course</string>
+    <string name="SwitchSaveCourseInfo">save course Info</string>
+    <string name="Quit">quit</string>
+    <string name="QQ">QQ</string>
+    <string name="QQ_Number">1411311525</string>
+    <string name="GitHub">GitHub</string>
+    <string name="GitHub_Name">Nihfkeol</string>
+    <string name="Open_Source_License">Use Open Source:</string>
+    <string name="OkHttp">OkHttp 4.9.0</string>
+    <string name="OkHttp_Info">com.squareup.okhttp3</string>
+    <string name="Jsoup">Jsoup</string>
+    <string name="Jsoup_Info">org.jsoup </string>
+    <string name="Setting">Setting</string>
+</resources>

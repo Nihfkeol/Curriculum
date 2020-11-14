@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">课程表</string>
+    <string name="Login">登录</string>
+    <string name="Student_ID">学号</string>
+    <string name="PassWord">密码</string>
+    <string name="SavePassword">保存密码</string>
+    <string name="AutoLogin">自动登录</string>
+    <string name="SwitchVersion">显示任课老师</string>
+    <string name="SwitchAll">显示所有课表</string>
+    <string name="SwitchSaveCourseInfo">保存课表信息</string>
+    <string name="About">关于</string>
+    <string name="UpData">更新</string>
+    <string name="Quit">退出</string>
+    <string name="QQ">QQ</string>
+    <string name="QQ_Number">1411311525</string>
+    <string name="GitHub">GitHub</string>
+    <string name="GitHub_Name">Nihfkeol</string>
+    <string name="Open_Source_License">使用开源代码：</string>
+    <string name="OkHttp">OkHttp 4.9.0</string>
+    <string name="OkHttp_Info">com.squareup.okhttp3 \n
+        https://github.com/square/okhttp</string>
+    <string name="Jsoup">Jsoup 1.13.1</string>
+    <string name="Jsoup_Info">org.jsoup \n
+        https://github.com/jhy/jsoup/
+    </string>
+    <string name="Setting">设置</string>
+</resources>
