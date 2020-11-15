@@ -232,6 +232,7 @@ class ShowCurriculumActivity : AppCompatActivity() {
             intent.setClass(this, MainActivity::class.java)
             intent.putExtra(resources.getString(R.string.FROM_ACTION), true)
             startActivity(intent)
+            finish()
         }
         //关于页
         view.aboutMenu.setOnClickListener {

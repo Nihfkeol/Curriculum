@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Message
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,13 +16,16 @@ import com.nihfkeol.curriculum.databinding.ActivityMainBinding
 import com.nihfkeol.curriculum.model.AccountViewModel
 import com.nihfkeol.curriculum.utils.NetWorkUtils
 import com.nihfkeol.curriculum.utils.ParseUtils
+import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
+import org.json.JSONObject
 import java.io.IOException
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
     private val myViewModel by viewModels<AccountViewModel>()
     var cookieStore: List<Cookie> = mutableListOf()
+    private val myHandler = MyHandler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         binding.data = myViewModel
         binding.lifecycleOwner = this
 
-        val intent = intent
+        getHitokoto()
 
         val isCheckSave: Boolean = myViewModel.getIsSave().value!!
         if (isCheckSave) {
@@ -46,13 +50,18 @@ class MainActivity : AppCompatActivity() {
             if (isCheck) {
                 myViewModel.setIsSave(isCheck)
             }
+            //取消保存时，保存按钮状态
+            if(!isCheck){
+                myViewModel.saveCheck()
+            }
         }
         binding.checkBoxSave.setOnClickListener {
             val isCheck = binding.checkBoxSave.isChecked
             myViewModel.setIsSave(isCheck)
-            //当取消保存密码的时候，保存密码也被取消打勾
+            //当取消保存密码的时候，保存密码也被取消打勾，保存按钮状态
             if (!isCheck) {
                 myViewModel.setIsAuto(isCheck)
+                myViewModel.saveCheck()
             }
         }
 
@@ -60,6 +69,7 @@ class MainActivity : AppCompatActivity() {
          * 每次进入这个activity，判断是不是从另一个activity跳转过来的，
          * 如果是就不跳转，不自动登录
          */
+        val intent = intent
         if (!intent.hasExtra(resources.getString(R.string.FROM_ACTION))) {
             val isCheckAuto = myViewModel.getIsAuto().value!!
             //如果自动登录就跳转
@@ -99,11 +109,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun getHitokoto() {
+        thread {
+            val netWorkUtils = NetWorkUtils()
+            val msg = Message()
+            val callback = object : Callback{
+                override fun onFailure(call: Call, e: IOException) {
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    msg.what = 2
+                    msg.obj = response.body!!.string()
+                    myHandler.sendMessage(msg)
+
+                }
+            }
+            netWorkUtils.getHitokoto(callback)
+        }
+
+    }
+
     /**
      * 登录
      */
     private fun toLogin() {
-        val myHandler = MyHandler()
         //cookie
         val cookieJar: CookieJar = object : CookieJar {
             override fun loadForRequest(url: HttpUrl): List<Cookie> {
@@ -155,10 +184,22 @@ class MainActivity : AppCompatActivity() {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             /**
+             * 0 网络连接错误，如果保存了课表就读取本地模式
              * 1 登录判断
-             * 2 网络连接错误，如果保存了课表就读取本地模式
+             * 2 获取一言成功
              */
             when (msg.what) {
+                0 -> {
+                    if (myViewModel.getIsSaveCourseInfo().value!!){
+                        Toast.makeText(applicationContext, "网络连接失败，将读取本地储存的课表", Toast.LENGTH_SHORT).show()
+                        val intent = Intent()
+                        intent.setClass(applicationContext, ShowCurriculumActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }else{
+                        Toast.makeText(applicationContext, "网络连接失败", Toast.LENGTH_SHORT).show()
+                    }
+                }
                 1 -> {
                     val isLogin = msg.obj as Boolean
                     if (isLogin) {
@@ -185,16 +226,26 @@ class MainActivity : AppCompatActivity() {
                             .show()
                     }
                 }
-                2 -> {
-                    if (myViewModel.getIsSaveCourseInfo().value!!){
-                        Toast.makeText(applicationContext, "网络连接失败，将读取本地储存的课表", Toast.LENGTH_SHORT).show()
-                        val intent = Intent()
-                        intent.setClass(applicationContext, ShowCurriculumActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }else{
-                        Toast.makeText(applicationContext, "网络连接失败", Toast.LENGTH_SHORT).show()
+                2 ->{
+                    try {
+                        val jsonObject = JSONObject(msg.obj.toString())
+                        val hitokoto = jsonObject.getString("hitokoto")
+                        var hitokotoInfo = "—— "
+                        val fromWho = jsonObject.getString("from_who")
+                        if ("null" != fromWho){
+                            hitokotoInfo += fromWho
+                        }
+                        val from = jsonObject.getString("from")
+                        if ("null" != from) {
+                            hitokotoInfo += "「$from」"
+                        }
+                        textViewHitokoto.text = hitokoto
+                        textViewHitokotoInfo.text = hitokotoInfo
+                        linearLayoutHitokoto.visibility = View.VISIBLE
+                    }catch (e : Exception){
+                        e.message
                     }
+
                 }
             }
         }

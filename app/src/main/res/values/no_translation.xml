@@ -34,6 +34,8 @@
     <string name="upDataImage" translatable="false">upDataImage</string>
     <string name="aboutImage" translatable="false">aboutImage</string>
     <string name="aboutActivityImage" translatable="false">icon</string>
+    <string name="Brackets_One" translatable="false">『</string>
+    <string name="Brackets_Two" translatable="false">』</string>
     <!--cardViewColor-->
     <array name="recyclerItemColors">
         <item>#FBB496</item>

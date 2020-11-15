@@ -4,9 +4,14 @@ import android.util.Log
 import okhttp3.*
 
 class NetWorkUtils {
+    //登录链接
     private val _loginUrl = "http://210.36.80.160/jsxsd/xk/LoginToXk"
+    //课表链接
     private val _courseUrl = "http://210.36.80.160/jsxsd/xskb/xskb_list.do"
+    //退出登录链接
     private val _logoutUrl = "http://210.36.80.160/jsxsd/xk/LoginToXk?method=exit&tktime="
+    //一言api
+    private val _hitokotoUrl= "https://v1.hitokoto.cn?charset=utf-8"
     private val _userAgent = "User-Agent"
     private val _userAgentValue =
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36"
@@ -58,6 +63,9 @@ class NetWorkUtils {
         _client.newCall(request).enqueue(callback)
     }
 
+    /**
+     * 获取每周课程表的连接方法
+     */
     fun getCourseHTML(cookie: String, callback: Callback, week: String) {
         val body = FormBody.Builder()
             .add("zc", week)
@@ -72,12 +80,25 @@ class NetWorkUtils {
         _client.newCall(request).enqueue(callback)
     }
 
+    /**
+     * 注销帐号
+     */
     fun logout(time: Long, cookie: String, callback: Callback) {
         val url = _logoutUrl + time
         val request = Request.Builder()
             .url(url)
             .addHeader(_connection, _connectionValue)
             .addHeader("Cookie", cookie)
+            .build()
+        _client.newCall(request).enqueue(callback)
+    }
+
+    /**
+     * 获取一言的方法
+     */
+    fun getHitokoto(callback: Callback) {
+        val request = Request.Builder()
+            .url(_hitokotoUrl)
             .build()
         _client.newCall(request).enqueue(callback)
     }
