@@ -18,10 +18,11 @@ class AboutActivity : AppCompatActivity() {
             try {
                 val url = "//mqqwpa://im/chat?chat_type=wpa&uin=" + resources.getString(R.string.QQ_Number)
                 val intent = Intent()
+                intent.action = Intent.ACTION_VIEW
                 intent.data = Uri.parse(url)
                 startActivity(intent)
             }catch (e : Exception){
-                Toast.makeText(this, "请检查是否安装QQ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "请检查是否安装最新版QQ", Toast.LENGTH_SHORT).show()
             }
         }
 
