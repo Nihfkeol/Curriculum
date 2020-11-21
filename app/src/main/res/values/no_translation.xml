@@ -25,6 +25,7 @@
     <string name="COUNT_COURSE_KEY" translatable="false">COUNT_COURSE</string>
     <!--是否保存课表信息在本地的key-->
     <string name="IS_SAVE_COURSE_KEY" translatable="false">SAVE_COURSE</string>
+    <string name="IS_NOT_SHOW_VERSION_INFO_KEY" translatable="false">NOT_SHOW_VERSION_INFO</string>
     <!-- 默认值 -->
     <string name="defStringValue" translatable="false"/>
     <bool name="defBool">false</bool>

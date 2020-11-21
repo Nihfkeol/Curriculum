@@ -18,10 +18,60 @@
     <string name="Open_Source_License">使用开源代码：</string>
     <string name="OkHttp">OkHttp 4.9.0</string>
     <string name="OkHttp_Info">com.squareup.okhttp3 \n
-        https://github.com/square/okhttp</string>
+        https://github.com/square/okhttp
+    </string>
     <string name="Jsoup">Jsoup 1.13.1</string>
     <string name="Jsoup_Info">org.jsoup \n
         https://github.com/jhy/jsoup/
     </string>
     <string name="Setting">设置</string>
+    <string name="NotShow">不再显示</string>
+    <string name="ShowVersionBtnText">确定</string>
+    <string name="VersionInfo">
+        2.1\n
+        \t  添加：\n
+        \t\t    自动更新检测\n
+        \t\t    显示版本信息\n
+        \t\t    显示一言\n
+        \t   修复：\n
+        \t\t    勾选框问题\n
+        \n
+        2.0\n
+        \t  修改：\n
+        \t\t    使用kotlin重构\n
+        \t\t    去除显示所有课表，切换为单周显示\n
+        \t\t    每周的相同课程使用同种颜色表示\n
+        \t\t    去除自动保存课表到本地，根据个人意愿是否保存\n
+        \t\t    每次都是请求登录不保存cookie到本地\n
+        \t  新增：\n
+        \t\t    退出当前账号\n
+        \t  修复：\n
+        \t\t    错误显示当前第几周\n
+        \n
+        1.2
+        \t  修复：\n
+        \t\t    勾选按钮问题\n
+        \t\t    切换课程表版本后，对话框列表样式显示不整齐\n
+        \t  添加：\n
+        \t\t    新的UI显示\n
+        \n
+        1.1
+        \t  修复：\n
+        \t\t    网络连接错误问题\n
+        \t  修改：\n
+        \t\t    UI显示\n
+        \t  添加：\n
+        \t\t    切换课程表版本\n
+        \t\t    把课程表储存在本地，防止学校服务器突然炸掉\n
+        \n
+        1.0\n
+        \t 课程表
+    </string>
+    <string name="DownloadFail">下载失败</string>
+    <string name="Cancel">取消</string>
+    <string name="Retry">重试</string>
+    <string name="CheckVersionLib">CheckVersionLib 2.4</string>
+    <string name="CheckVersionLib_Info">com.github.AlexLiuSheng\n
+    https://github.com/AlexLiuSheng/CheckVersionLib
+    </string>
 </resources>

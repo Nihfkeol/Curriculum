@@ -40,8 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
         android:foreground="?selectableItemBackground"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutGitHub"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
@@ -77,8 +77,8 @@
         android:id="@+id/linearLayoutGitHub"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:foreground="?selectableItemBackground"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="@+id/linearLayoutQQ"
         app:layout_constraintHorizontal_bias="0.0"
@@ -149,9 +149,9 @@
         <LinearLayout
             android:id="@+id/linearLayoutJsoup"
             android:layout_width="match_parent"
-            android:foreground="?selectableItemBackground"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
+            android:foreground="?selectableItemBackground"
             android:orientation="vertical">
 
             <TextView
@@ -163,6 +163,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/Jsoup_Info" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutCheckVersionLib"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:foreground="?selectableItemBackground"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/CheckVersionLib" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/CheckVersionLib_Info" />
         </LinearLayout>
 
     </LinearLayout>

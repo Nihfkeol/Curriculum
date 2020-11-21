@@ -18,8 +18,61 @@
     <string name="GitHub_Name">Nihfkeol</string>
     <string name="Open_Source_License">Use Open Source:</string>
     <string name="OkHttp">OkHttp 4.9.0</string>
-    <string name="OkHttp_Info">com.squareup.okhttp3</string>
+    <string name="OkHttp_Info">com.squareup.okhttp3 \n
+        https://github.com/square/okhttp
+    </string>
     <string name="Jsoup">Jsoup</string>
-    <string name="Jsoup_Info">org.jsoup </string>
+    <string name="Jsoup_Info">org.jsoup \n
+        https://github.com/jhy/jsoup/
+    </string>
     <string name="Setting">Setting</string>
+    <string name="NotShow">Don\'t Show</string>
+    <string name="ShowVersionBtnText">OK</string>
+    <string name="VersionInfo">
+        2.1\n
+        \t  ADD:\n
+        \t\t    Automatic update detection\n
+        \t\t    Display version information\n
+        \t\t    Show Hitokoto\n
+        \t  FIX:\n
+        \t\t    Check button problems\n
+        \n
+        2.0\n
+        \t  MODIFY:\n
+        \t\t    Use kotlin Refactoring\n
+        \t\t    Remove all class schedules from display, Switch to single week display\n
+        \t\t    The same lesson each week is represented by the same color\n
+        \t\t    Remove the automatic saving of class schedules to local, save or not save according to personal preference.\n
+        \t\t    Do not save cookies locally\n
+        \t  ADD:\n
+        \t\t    Log out of current account\n
+        \t  FIX:\n
+        \t\t    Error showing the current week\n
+        \n
+        1.2
+        \t  FIX:\n
+        \t\t    Check button problems\n
+        \t\t    The dialog box list style does not display neatly after switching the class schedule version.\n
+        \t  ADD:\n
+        \t\t    New UI display\n
+        \n
+        1.1
+        \t  FIX:\n
+        \t\t    Network Connection Error Problem\n
+        \t  MODIFY:\n
+        \t\t    UI Display\n
+        \t  ADD:\n
+        \t\t    Switching class schedule versions\n
+        \t\t    Store class schedules locally in case the school\'s server goes down.\n
+        \n
+        1.0\n
+        \t Curriculum
+    </string>
+    <string name="DownloadFail">DownloadFail</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Retry">retry</string>
+    <string name="CheckVersionLib">CheckVersionLib 2.4</string>
+    <string name="CheckVersionLib_Info">com.github.AlexLiuSheng\n
+    https://github.com/AlexLiuSheng/CheckVersionLib
+    </string>
 </resources>

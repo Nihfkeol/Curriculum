@@ -46,5 +46,12 @@ class AboutActivity : AppCompatActivity() {
             intent.data = Uri.parse(url)
             startActivity(intent)
         }
+
+        linearLayoutCheckVersionLib.setOnClickListener {
+            val url = "https://github.com/AlexLiuSheng/CheckVersionLib"
+            val intent = Intent()
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
     }
 }

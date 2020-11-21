@@ -26,6 +26,9 @@ class AccountViewModel(application: Application, private val handle: SavedStateH
 
     private val _isSaveCourseInfoKey = application.resources.getString(R.string.IS_SAVE_COURSE_KEY)
 
+    private val _isNotShowVersionInfoKey =
+        application.resources.getString(R.string.IS_NOT_SHOW_VERSION_INFO_KEY)
+
     init {
         val defString = application.getString(R.string.defStringValue)
         //判断是否有学号的key,没有就加载
@@ -36,15 +39,18 @@ class AccountViewModel(application: Application, private val handle: SavedStateH
             handle.set(_passwordKey, shp.getString(_passwordKey, defString))
         }
 
-        val defBool = false
+        val defBool = application.resources.getBoolean(R.bool.defBool)
         if (!handle.contains(_isAutoKey)) {
             handle.set(_isAutoKey, shp.getBoolean(_isAutoKey, defBool))
         }
         if (!handle.contains(_isSaveKey)) {
             handle.set(_isSaveKey, shp.getBoolean(_isSaveKey, defBool))
         }
-        if (!handle.contains(_isSaveCourseInfoKey)){
+        if (!handle.contains(_isSaveCourseInfoKey)) {
             handle.set(_isSaveCourseInfoKey, shp.getBoolean(_isSaveCourseInfoKey, defBool))
+        }
+        if (!handle.contains(_isNotShowVersionInfoKey)) {
+            handle.set(_isNotShowVersionInfoKey, shp.getBoolean(_isNotShowVersionInfoKey, defBool))
         }
     }
 
@@ -103,6 +109,17 @@ class AccountViewModel(application: Application, private val handle: SavedStateH
 
     fun getIsSaveCourseInfo(): MutableLiveData<Boolean> {
         return handle.getLiveData(_isSaveCourseInfoKey)
+    }
+
+    fun setIsNotShowVersionInfo(isShow: Boolean) {
+        handle.set(_isNotShowVersionInfoKey, isShow)
+        val edit = shp.edit()
+        edit.putBoolean(_isNotShowVersionInfoKey, isShow)
+        edit.apply()
+    }
+
+    fun getIsNotShowVersionInfo(): MutableLiveData<Boolean> {
+        return handle.getLiveData(_isNotShowVersionInfoKey)
     }
 
 }

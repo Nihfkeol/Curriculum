@@ -23,6 +23,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.nihfkeol.curriculum.adapter.ViewPagerAdapter
 import com.nihfkeol.curriculum.fragment.CourseDetailFragment
 import com.nihfkeol.curriculum.model.CurriculumViewModel
+import com.nihfkeol.curriculum.ui.MyBaseDialog
 import com.nihfkeol.curriculum.utils.FileUtils
 import com.nihfkeol.curriculum.utils.NetWorkUtils
 import com.nihfkeol.curriculum.utils.ParseUtils
@@ -199,7 +200,6 @@ class ShowCurriculumActivity : AppCompatActivity() {
 
     @SuppressLint("InflateParams")
     private fun alertDialogSetting() {
-        val builder = AlertDialog.Builder(this)
         val view = layoutInflater.inflate(R.layout.alertdialog_setting, null)
         //如果version=1表示显示老师，并且switch为选中状态
         view.switchVersionMenu.isChecked = cViewModel.getVersion().value == 1
@@ -240,9 +240,10 @@ class ShowCurriculumActivity : AppCompatActivity() {
             intent.setClass(this, AboutActivity::class.java)
             startActivity(intent)
         }
-        builder.setView(view)
-        val alertDialog = builder.create()
-        alertDialog.show()
+        val myBaseDialog = MyBaseDialog(this, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert,view)
+        myBaseDialog.setCancelable(true)
+        myBaseDialog.setCanceledOnTouchOutside(true)
+        myBaseDialog.show()
     }
 
     /**
