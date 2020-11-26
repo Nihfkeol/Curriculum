@@ -28,6 +28,10 @@
     <string name="NotShow">不再显示</string>
     <string name="ShowVersionBtnText">确定</string>
     <string name="VersionInfo">
+        2.1.1\n
+        \t  修复：\n
+        \t\t    勾选保存课程表后，在没有网的情况下读取本地课程表失败\n
+        \n
         2.1\n
         \t  添加：\n
         \t\t    自动更新检测\n

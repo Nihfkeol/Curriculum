@@ -29,6 +29,10 @@
     <string name="NotShow">Don\'t Show</string>
     <string name="ShowVersionBtnText">OK</string>
     <string name="VersionInfo">
+        2.1.1\n
+        \t  FIX：\n
+        \t\t    Failed to read the local class schedule without a network after saving the class schedule is checked\n
+        \n
         2.1\n
         \t  ADD:\n
         \t\t    Automatic update detection\n

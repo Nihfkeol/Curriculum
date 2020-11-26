@@ -101,6 +101,8 @@ class ShowCurriculumActivity : AppCompatActivity() {
                 showData()
             }
             saveCourse()
+        }else{
+            showData()
         }
 
 
