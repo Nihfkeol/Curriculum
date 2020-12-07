@@ -29,6 +29,10 @@
     <string name="NotShow">Don\'t Show</string>
     <string name="ShowVersionBtnText">OK</string>
     <string name="VersionInfo">
+        2.1.2\n
+        \t  MODIFY：
+        \t\t    Reduce response time to connect to school servers
+        \t\t    Remove some redundant code
         2.1.1\n
         \t  FIX：\n
         \t\t    Failed to read the local class schedule without a network after saving the class schedule is checked\n

@@ -16,7 +16,6 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -60,7 +59,6 @@ class ShowCurriculumActivity : AppCompatActivity() {
     private lateinit var fileName: String
     private lateinit var filePath: File
     private val fileUtils = FileUtils().getInstance()!!
-    private val TAG = "ShowCurriculumActivityLog："
 
     /**
      * 定义数据
@@ -83,7 +81,6 @@ class ShowCurriculumActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_curriculum)
-        Log.w(TAG, "onCreate")
         initData()
         val intent = intent
         val cookieKey = resources.getString(R.string.COOKIE_KEY)
@@ -119,7 +116,6 @@ class ShowCurriculumActivity : AppCompatActivity() {
             progressBar.min = nowWeek
             progressBar.max = maxWeek
             for (i in nowWeek..maxWeek) {
-                Log.w(TAG, "saveCourse-$i")
                 thread {
                     val msg = Message()
                     val callback = object : Callback {
@@ -130,7 +126,6 @@ class ShowCurriculumActivity : AppCompatActivity() {
                         }
 
                         override fun onResponse(call: Call, response: Response) {
-                            Log.w(TAG, "onResponse-$i")
                             msg.obj = response.body!!.string()
                             msg.arg1 = i
                             msg.what = 3
@@ -346,7 +341,6 @@ class ShowCurriculumActivity : AppCompatActivity() {
                     }
                 }
                 3 -> {
-                    Log.w(TAG, "what=3-${msg.arg1}")
                     fileName = resources.getString(R.string.FILE_NAME) + "_" + msg.arg1
                     filePath =
                         File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), fileName)

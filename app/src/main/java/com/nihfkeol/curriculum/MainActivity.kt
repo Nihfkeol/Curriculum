@@ -2,19 +2,15 @@ package com.nihfkeol.curriculum
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.os.Message
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.allenliu.versionchecklib.core.http.HttpHeaders
@@ -31,10 +27,7 @@ import com.nihfkeol.curriculum.utils.NetWorkUtils
 import com.nihfkeol.curriculum.utils.ParseUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_show_updata_version.*
-import kotlinx.android.synthetic.main.dialog_show_version_info.*
 import kotlinx.android.synthetic.main.dialog_show_version_info.view.*
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -46,7 +39,6 @@ class MainActivity : AppCompatActivity() {
     var cookieStore: List<Cookie> = mutableListOf()
     private val myHandler = MyHandler()
     private val versionCheckerInstance = AllenVersionChecker.getInstance()
-    private val _tag = "MainActivity："
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

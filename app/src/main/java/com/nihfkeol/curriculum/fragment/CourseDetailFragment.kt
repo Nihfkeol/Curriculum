@@ -14,10 +14,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.nihfkeol.curriculum.model.CurriculumViewModel
 import com.nihfkeol.curriculum.MainActivity
 import com.nihfkeol.curriculum.R
 import com.nihfkeol.curriculum.adapter.CourseRecyclerViewAdapter
+import com.nihfkeol.curriculum.model.CurriculumViewModel
 import com.nihfkeol.curriculum.pojo.Course
 import com.nihfkeol.curriculum.utils.FileUtils
 import com.nihfkeol.curriculum.utils.NetWorkUtils

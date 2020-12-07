@@ -1,8 +1,6 @@
 package com.nihfkeol.curriculum.utils
 
-import android.content.Context
 import android.os.Environment
-import com.nihfkeol.curriculum.R
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream

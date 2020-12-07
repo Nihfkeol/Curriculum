@@ -39,8 +39,8 @@ class MyBaseDialog : Dialog {
             setContentView(res)
         }else{
             setContentView(view!!)
-            window?.attributes?.width = 850
         }
+        window?.attributes?.width = 850
         setCanceledOnTouchOutside(false)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 

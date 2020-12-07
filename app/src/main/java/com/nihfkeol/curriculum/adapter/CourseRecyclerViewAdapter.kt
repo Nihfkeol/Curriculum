@@ -3,7 +3,6 @@ package com.nihfkeol.curriculum.adapter
 import android.content.Context
 import android.graphics.Rect
 import android.text.Html
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nihfkeol.curriculum.R
 import com.nihfkeol.curriculum.pojo.Course
 import com.nihfkeol.curriculum.pojo.ItemColor
-import kotlinx.android.synthetic.main.item_course.view.*
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashSet
-import kotlin.random.Random
 
 class CourseRecyclerViewAdapter(
     private val context: Context,
@@ -129,7 +122,7 @@ class CourseRecyclerViewAdapter(
                 if (split?.size == 1) {
                     split = courseInfoString?.split(" --------------------- ")
                 }
-                if (null != courseInfoString) {
+                if ("" != courseInfoString) {
                     isShowDialog = true
                     alertDialogBuilder.setAdapter(
                         ArrayAdapter(
@@ -140,7 +133,7 @@ class CourseRecyclerViewAdapter(
                     )
 
                     //从课程信息中分解出课程名
-                    val cname = courseInfoString.split(" ")[0]
+                    val cname = courseInfoString!!.split(" ")[0]
                     for (i in courseArray.indices) {
                         if (cname == courseArray[i]) {
                             holder.cView.setCardBackgroundColor(itemColors[i]!!.getCardViewColor())

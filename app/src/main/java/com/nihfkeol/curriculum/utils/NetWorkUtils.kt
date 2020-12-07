@@ -1,7 +1,7 @@
 package com.nihfkeol.curriculum.utils
 
-import android.util.Log
 import okhttp3.*
+import java.util.concurrent.TimeUnit
 
 class NetWorkUtils {
     //登录链接
@@ -24,7 +24,7 @@ class NetWorkUtils {
     }
 
     constructor(cookieJar: CookieJar) {
-        _client = OkHttpClient.Builder().cookieJar(cookieJar).build()
+        _client = OkHttpClient.Builder().connectTimeout(3,TimeUnit.SECONDS).cookieJar(cookieJar).build()
     }
 
     /**
