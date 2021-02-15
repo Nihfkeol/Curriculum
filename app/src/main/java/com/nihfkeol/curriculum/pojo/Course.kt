@@ -11,19 +11,4 @@ data class Course(
         var ClassTime: String?,
         var CourseInfoString: String?
     )
-//    {
-//        override fun toString(): String {
-//            return "{\"CourseInfo\":{" +
-//                    "\"ClassTime\":\"$ClassTime\"" +
-//                    ",\"CourseInfoString\":\"$CourseInfoString\"}}"
-//        }
-//    }
-
-//    override fun toString(): String {
-//        return "{\"Course\":{" +
-//                "\"Week\":\"$Week\", " +
-//                "\"courseList\":$courseList" +
-//                "}}"
-//    }
-
 }

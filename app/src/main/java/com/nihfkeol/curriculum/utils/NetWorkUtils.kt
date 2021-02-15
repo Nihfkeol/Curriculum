@@ -6,25 +6,46 @@ import java.util.concurrent.TimeUnit
 class NetWorkUtils {
     //登录链接
     private val _loginUrl = "http://210.36.80.160/jsxsd/xk/LoginToXk"
+
     //课表链接
     private val _courseUrl = "http://210.36.80.160/jsxsd/xskb/xskb_list.do"
+
     //退出登录链接
     private val _logoutUrl = "http://210.36.80.160/jsxsd/xk/LoginToXk?method=exit&tktime="
+
     //一言api
-    private val _hitokotoUrl= "https://v1.hitokoto.cn?charset=utf-8"
+    private val _hitokotoUrl = "https://v1.hitokoto.cn?charset=utf-8"
+
+    //成绩学年列表
+    private val _schoolYearUrl =
+        "http://210.36.80.160/jsxsd/kscj/cjcx_query?Ves632DSdyV=NEW_XSD_XJCJ"
+
+    //成绩列表
+    private val _scoreUrl = "http://210.36.80.160/jsxsd/kscj/cjcx_list"
     private val _userAgent = "User-Agent"
     private val _userAgentValue =
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36"
     private val _connection = "Connection"
     private val _connectionValue = "keep-alive"
     private var _client: OkHttpClient
+    private lateinit var requestBuilder: Request.Builder
+    private val _cookie = "Cookie"
+
+    constructor(cookie: String) {
+        _client = OkHttpClient.Builder().build()
+        requestBuilder = Request.Builder()
+            .addHeader(_connection, _connectionValue)
+            .addHeader(_userAgent, _userAgentValue)
+            .addHeader(_cookie, cookie)
+    }
 
     constructor() {
         _client = OkHttpClient.Builder().build()
     }
 
     constructor(cookieJar: CookieJar) {
-        _client = OkHttpClient.Builder().connectTimeout(3,TimeUnit.SECONDS).cookieJar(cookieJar).build()
+        _client =
+            OkHttpClient.Builder().connectTimeout(3, TimeUnit.SECONDS).cookieJar(cookieJar).build()
     }
 
     /**
@@ -50,15 +71,11 @@ class NetWorkUtils {
 
     /**
      * 获取课程表网络连接的方法
-     * @param cookie cookie值
      * @param callback 回调方法
      */
-    fun getCourseHTML(cookie: String, callback: Callback) {
-        val request = Request.Builder()
+    fun getCourseHTML(callback: Callback) {
+        val request = requestBuilder
             .url(_courseUrl)
-            .addHeader(_connection, _connectionValue)
-            .addHeader(_userAgent, _userAgentValue)
-            .addHeader("Cookie", cookie)
             .build()
         _client.newCall(request).enqueue(callback)
     }
@@ -66,15 +83,12 @@ class NetWorkUtils {
     /**
      * 获取每周课程表的连接方法
      */
-    fun getCourseHTML(cookie: String, callback: Callback, week: String) {
+    fun getCourseHTML(callback: Callback, week: String) {
         val body = FormBody.Builder()
             .add("zc", week)
             .build()
-        val request = Request.Builder()
+        val request = requestBuilder
             .url(_courseUrl)
-            .addHeader(_connection, _connectionValue)
-            .addHeader(_userAgent, _userAgentValue)
-            .addHeader("Cookie", cookie)
             .post(body)
             .build()
         _client.newCall(request).enqueue(callback)
@@ -83,12 +97,10 @@ class NetWorkUtils {
     /**
      * 注销帐号
      */
-    fun logout(time: Long, cookie: String, callback: Callback) {
+    fun logout(callback: Callback, time: Long) {
         val url = _logoutUrl + time
-        val request = Request.Builder()
+        val request = requestBuilder
             .url(url)
-            .addHeader(_connection, _connectionValue)
-            .addHeader("Cookie", cookie)
             .build()
         _client.newCall(request).enqueue(callback)
     }
@@ -103,4 +115,28 @@ class NetWorkUtils {
         _client.newCall(request).enqueue(callback)
     }
 
+    /**
+     * 获取学年列表
+     */
+    fun getSchoolYearList(callback: Callback) {
+        val request = requestBuilder
+            .url(_schoolYearUrl)
+            .build()
+        _client.newCall(request).enqueue(callback)
+    }
+
+    /**
+     * 获取成绩单
+     */
+    fun getTranscript(callback: Callback, year: String) {
+        val body = FormBody.Builder()
+            .add("kksj", year)
+            .add("xsfs", "all")
+            .build()
+        val request = requestBuilder
+            .url(_scoreUrl)
+            .post(body)
+            .build()
+        _client.newCall(request).enqueue(callback)
+    }
 }

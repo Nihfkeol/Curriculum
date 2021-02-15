@@ -2,7 +2,6 @@
 <resources>
     <!-- 存于shp文件中的值 -->
     <string name="SHP_NAME" translatable="false">MY_DATA</string>
-    <string name="COOKIE_SHP_NAME" translatable="false">MY_COOKIE</string>
     <!--帐号密码-->
     <string name="STUDENT_ID" translatable="false">STUDENT_ID</string>
     <string name="PASSWORD" translatable="false">PASSWORD</string>
@@ -13,8 +12,6 @@
     <string name="IS_AUTO" translatable="false">IS_AUTO</string>
     <!--保存课程表版本值的key-->
     <string name="VERSION_KEY" translatable="false">VERSION</string>
-    <!--保存课程表版本值的key-->
-    <string name="IS_SHOW_ALL_KEY" translatable="false">SHOW_ALL</string>
     <!--来自ShowCurriculumActivity的值-->
     <string name="FROM_ACTION" translatable="false">FROM_scACTION</string>
     <!-- 存于本地文件的文件名 -->
@@ -26,13 +23,18 @@
     <!--是否保存课表信息在本地的key-->
     <string name="IS_SAVE_COURSE_KEY" translatable="false">SAVE_COURSE</string>
     <string name="IS_NOT_SHOW_VERSION_INFO_KEY" translatable="false">NOT_SHOW_VERSION_INFO</string>
+    <string name="WIDTH_PIXELS_KEY" translatable="false">WIDTH_PIXELS_KEY</string>
+    <string name="HEIGHT_PIXELS_KEY" translatable="false">HEIGHT_PIXELS_KEY</string>
+    <string name="START_DATE_KEY" translatable="false">START_DATE_KEY</string>
     <!-- 默认值 -->
     <string name="defStringValue" translatable="false"/>
     <bool name="defBool">false</bool>
     <!--Image的说明-->
     <string name="switchImage" translatable="false">switchImage</string>
     <string name="switchAllImage" translatable="false">switchAllImage</string>
-    <string name="upDataImage" translatable="false">upDataImage</string>
+    <string name="updateImage" translatable="false">updateImage</string>
+    <string name="clockImage" translatable="false">clockImage</string>
+    <string name="quitImage" translatable="false">quitImage</string>
     <string name="aboutImage" translatable="false">aboutImage</string>
     <string name="aboutActivityImage" translatable="false">icon</string>
     <string name="Brackets_One" translatable="false">『</string>

@@ -53,7 +53,7 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:foreground="?selectableItemBackground"
-                android:text="@string/UpData"
+                android:text="@string/Update"
                 android:textSize="16sp"/>
         </LinearLayout>
     </LinearLayout>

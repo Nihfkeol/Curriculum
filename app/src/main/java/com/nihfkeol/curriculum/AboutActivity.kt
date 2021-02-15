@@ -13,10 +13,12 @@ class AboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
 
+        val packageInfo = packageManager.getPackageInfo(packageName, 0)
+        textViewShowVersion.text = packageInfo.versionName
 
         linearLayoutQQ.setOnClickListener {
             try {
-                val url = "//mqqwpa://im/chat?chat_type=wpa&uin=" + resources.getString(R.string.QQ_Number)
+                val url = "mqqwpa://im/chat?chat_type=wpa&uin=" + resources.getString(R.string.QQ_Number)
                 val intent = Intent()
                 intent.action = Intent.ACTION_VIEW
                 intent.data = Uri.parse(url)

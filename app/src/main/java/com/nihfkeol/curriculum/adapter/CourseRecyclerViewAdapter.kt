@@ -3,13 +3,16 @@ package com.nihfkeol.curriculum.adapter
 import android.content.Context
 import android.graphics.Rect
 import android.text.Html
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.nihfkeol.curriculum.R
 import com.nihfkeol.curriculum.pojo.Course
@@ -19,6 +22,7 @@ class CourseRecyclerViewAdapter(
     private val context: Context,
     private val courses: List<Course>,
     private val textWidth: Int,
+    private val widthPixelsKey: Int,
     private val week: String,
     private val countCourse: Set<String>
 ) : RecyclerView.Adapter<CourseRecyclerViewAdapter.MyViewHolder>() {
@@ -148,6 +152,9 @@ class CourseRecyclerViewAdapter(
             holder.cView.setOnClickListener {
                 val alertDialog = alertDialogBuilder.create()
                 alertDialog.show()
+                val params = alertDialog.window!!.attributes
+                params.width = widthPixelsKey
+                alertDialog.window!!.attributes = params
             }
         }
     }

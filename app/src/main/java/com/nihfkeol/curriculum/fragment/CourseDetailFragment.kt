@@ -14,10 +14,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.nihfkeol.curriculum.MainActivity
+import com.nihfkeol.curriculum.LoginActivity
 import com.nihfkeol.curriculum.R
 import com.nihfkeol.curriculum.adapter.CourseRecyclerViewAdapter
 import com.nihfkeol.curriculum.model.CurriculumViewModel
+import com.nihfkeol.curriculum.model.UtilsModel
 import com.nihfkeol.curriculum.pojo.Course
 import com.nihfkeol.curriculum.utils.FileUtils
 import com.nihfkeol.curriculum.utils.NetWorkUtils
@@ -35,7 +36,9 @@ private const val ARG_WEEK = "weekKey"
 
 class CourseDetailFragment : Fragment() {
     private var week: String? = null
+
     private lateinit var viewModel: CurriculumViewModel
+    private lateinit var utilsModel:UtilsModel
 
     private lateinit var parseUtils: ParseUtils
     private lateinit var courseList: List<Course>
@@ -63,6 +66,14 @@ class CourseDetailFragment : Fragment() {
                 requireActivity()
             )
         ).get(CurriculumViewModel::class.java)
+        utilsModel = ViewModelProvider(
+            requireActivity(),
+            SavedStateViewModelFactory(
+                requireActivity().application,
+                requireActivity()
+            )
+        ).get(UtilsModel::class.java)
+
         //禁止滑动，设置49格
         gManager = object : GridLayoutManager(context, 49, HORIZONTAL, false) {
             override fun canScrollHorizontally(): Boolean {
@@ -82,6 +93,7 @@ class CourseDetailFragment : Fragment() {
         fileName = requireActivity().resources.getString(R.string.FILE_NAME) + "_" + week
         filePath =
             File(requireActivity().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), fileName)
+        dataTools()
     }
 
     override fun onCreateView(
@@ -95,18 +107,13 @@ class CourseDetailFragment : Fragment() {
         return view
     }
 
-    override fun onStart() {
-        super.onStart()
-        dataTools()
-    }
-
     /**
      * 数据类
      * 如果是勾选了保存文件就读取本地的
      * 否则从网络获取
      */
     private fun dataTools() {
-        if (viewModel.getIsSaveCourseInfo().value!!) {
+        if (utilsModel.getIsSaveCourseInfo().value!!) {
             if (filePath.exists()) {
                 courseHTML = fileUtils.readHtml(filePath)
                 showData()
@@ -126,15 +133,18 @@ class CourseDetailFragment : Fragment() {
         val versionStr = parseUtils.parseVersion(viewModel.getVersion().value!!)
         courseList = parseUtils.parseCourse(versionStr)
 
-        adapter =
-            CourseRecyclerViewAdapter(
-                requireContext(),
-                courseList,
-                viewModel.getWidth().value!!,
-                week!!,
-                viewModel.getCountCourse().value!!
-            )
-        requireView().showCourseRecyclerView.adapter = adapter
+        if (isAdded){
+            adapter =
+                CourseRecyclerViewAdapter(
+                    requireActivity(),
+                    courseList,
+                    viewModel.getWidth().value!!,
+                    utilsModel.getWidthPixels().value!!,
+                    week!!,
+                    viewModel.getCountCourse().value!!
+                )
+            requireView().showCourseRecyclerView.adapter = adapter
+        }
     }
 
     /**
@@ -143,7 +153,7 @@ class CourseDetailFragment : Fragment() {
     private fun getDataFromNet() {
         val myHandle = MyHandle()
         thread {
-            val netWorkUtils = NetWorkUtils()
+            val netWorkUtils = NetWorkUtils(utilsModel.getCookie().value!!)
             val msg = Message()
             val callback = object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
@@ -157,7 +167,7 @@ class CourseDetailFragment : Fragment() {
                     myHandle.sendMessage(msg)
                 }
             }
-            netWorkUtils.getCourseHTML(viewModel.getCookie().value!!, callback, week!!)
+            netWorkUtils.getCourseHTML(callback, week!!)
         }
     }
 
@@ -184,7 +194,7 @@ class CourseDetailFragment : Fragment() {
                     /**
                      * 如果勾选了，并且文件不存在，就保存文件
                      */
-                    if (viewModel.getIsSaveCourseInfo().value!!) {
+                    if (utilsModel.getIsSaveCourseInfo().value!!) {
                         if (!filePath.exists()) {
                             fileUtils.writeHtml(courseHTML!!, filePath)
                         }
@@ -194,7 +204,7 @@ class CourseDetailFragment : Fragment() {
                 -1 -> {
                     Toast.makeText(requireActivity(), " 网络连接失败", Toast.LENGTH_SHORT).show()
                     val intent = Intent()
-                    intent.setClass(requireActivity(), MainActivity::class.java)
+                    intent.setClass(requireActivity(), LoginActivity::class.java)
                     intent.putExtra(
                         requireActivity().resources.getString(R.string.FROM_ACTION),
                         true

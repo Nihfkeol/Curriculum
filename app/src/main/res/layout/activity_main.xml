@@ -1,211 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-    <data>
 
-        <variable
-            name="data"
-            type="com.nihfkeol.curriculum.model.AccountViewModel" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@drawable/constraint_layout_background"
-        tools:context=".MainActivity">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.15" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.85" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Login"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="40sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.2" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:layout_constraintVertical_bias="0.12"
-            tools:ignore="MissingConstraints">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextStudentId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:hint="@string/Student_ID"
-                android:inputType="number"
-                android:text="@{data.studentId}" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="MissingConstraints">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:hint="@string/PassWord"
-                android:inputType="textPassword"
-                android:labelFor="@id/editTextPassword"
-                android:text="@{data.password}" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <CheckBox
-            android:id="@+id/checkBoxSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:checked="@{data.isSave}"
-            android:text="@string/SavePassword"
-            app:layout_constraintEnd_toStartOf="@+id/checkBoxAuto"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
-
-        <CheckBox
-            android:id="@+id/checkBoxAuto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="@{data.isAuto}"
-            android:text="@string/AutoLogin"
-            app:layout_constraintBottom_toBottomOf="@+id/checkBoxSave"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/checkBoxSave"
-            app:layout_constraintTop_toTopOf="@+id/checkBoxSave" />
+        android:fitsSystemWindows="true"
+        android:layout_gravity="start"
+        app:menu="@menu/sliding_menu">
 
         <Button
-            android:id="@+id/buttonLogin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/btn_normal"
-            android:text="@string/Login"
-            android:textColor="@color/colorPrimaryText"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/checkBoxSave"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <LinearLayout
-            android:id="@+id/linearLayoutHitokoto"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
-            app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
-            app:layout_constraintVertical_bias="0.4">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:text="@string/Brackets_One"
-                android:textColor="@color/colorSecondaryText"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/textViewHitokoto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:textColor="@color/colorSecondaryText"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:text="@string/Brackets_Two"
-                android:textColor="@color/colorSecondaryText"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/textViewHitokotoInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:textColor="@color/colorSecondaryText"
-                android:textSize="10sp"
-                tools:ignore="SmallSp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayoutAbout"
+            android:id="@+id/quitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
-            app:layout_constraintVertical_bias="0.85">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/aboutImage"
-                app:srcCompat="@drawable/ic_about" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/About" />
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="24dp"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_quit"
+            android:drawablePadding="1dp"
+            android:text="@string/Quit" />
+    </com.google.android.material.navigation.NavigationView>
+</androidx.drawerlayout.widget.DrawerLayout>

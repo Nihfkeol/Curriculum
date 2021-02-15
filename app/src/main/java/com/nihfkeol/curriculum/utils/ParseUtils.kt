@@ -35,6 +35,9 @@ class ParseUtils(html: String) {
         return input[i].attr("name")
     }
 
+    /**
+     * 解析课程
+     */
     fun parseCourse(version: String): List<Course> {
         //先记录课程信息
         val courseInfoMap = HashMap<Int, Course.CourseInfo>()
@@ -95,6 +98,10 @@ class ParseUtils(html: String) {
         return courseList
     }
 
+    /**
+     * 最大周数
+     * 课程列表
+     */
     fun parseMaxCourse(courseList: List<Course>): MaxCourse {
         //最大周数（第几周没课）
         var maxWeek = 0
@@ -133,5 +140,32 @@ class ParseUtils(html: String) {
             }
         }
         return MaxCourse(maxWeek, set)
+    }
+
+    /**
+     * 获取学年列表
+     */
+    fun parseSchoolYear(): List<String> {
+        trElements = document.getElementById("kksj").select("option")
+        val list = ArrayList<String>()
+        //只显示最近5年
+        for (i in 0 until 6) {
+            list.add(trElements[i].attr("value"))
+        }
+        return list
+    }
+
+    fun parseTranscript(): List<Map<String, String>> {
+        trElements = document.getElementById("dataList").select("tr")
+        val transcripts = ArrayList<Map<String, String>>()
+        for (element in trElements) {
+            val elements = element.allElements
+            val map = HashMap<String, String>().also {
+                it["courseTitle"] = elements[4].text()
+                it["score"] = elements[5].text()
+            }
+            transcripts.add(map)
+        }
+        return transcripts
     }
 }

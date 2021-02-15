@@ -15,9 +15,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
         <activity android:name=".AboutActivity"/>
-        <activity android:name=".ShowCurriculumActivity"
+        <activity android:name=".MainActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

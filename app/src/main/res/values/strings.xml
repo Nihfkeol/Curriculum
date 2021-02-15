@@ -9,12 +9,12 @@
     <string name="SwitchAll">显示所有课表</string>
     <string name="SwitchSaveCourseInfo">保存课表信息</string>
     <string name="About">关于</string>
-    <string name="UpData">更新</string>
+    <string name="Update">更新</string>
     <string name="Quit">退出</string>
     <string name="QQ">QQ</string>
     <string name="QQ_Number">1411311525</string>
     <string name="GitHub">GitHub</string>
-    <string name="GitHub_Name">Nihfkeol</string>
+    <string name="Name">Nihfkeol</string>
     <string name="Open_Source_License">使用开源代码：</string>
     <string name="OkHttp">OkHttp 4.9.0</string>
     <string name="OkHttp_Info">com.squareup.okhttp3 \n
@@ -28,10 +28,19 @@
     <string name="NotShow">不再显示</string>
     <string name="ShowVersionBtnText">确定</string>
     <string name="VersionInfo">
+        2.2\n
+        \t  修改：\n
+        \t\t    整理了登录页面和关于页面布局\n
+        \t  新增：\n
+        \t\t    自己选择开学日期\n
+        \t\t    快速定位到当前周\n
+        \t\t    查看成绩\n
+        \n
         2.1.2\n
-        \t  修改：
-        \t\t    缩短连接学校服务器响应时间
-        \t\t    删除一些冗余代码
+        \t  修改：\n
+        \t\t    缩短连接学校服务器响应时间\n
+        \t\t    删除一些冗余代码\n
+        \n
         2.1.1\n
         \t  修复：\n
         \t\t    勾选保存课程表后，在没有网的情况下读取本地课程表失败\n
@@ -82,4 +91,9 @@
     <string name="CheckVersionLib_Info">com.github.AlexLiuSheng\n
     https://github.com/AlexLiuSheng/CheckVersionLib
     </string>
+    <string name="Version">版本</string>
+    <string name="Author">作者</string>
+    <string name="BackWeek">回到当前周</string>
+    <string name="setStartDate">设置开学日期</string>
+    <string name="ScoreWarningText">请先登录</string>
 </resources>

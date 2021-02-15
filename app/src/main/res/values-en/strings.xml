@@ -8,14 +8,14 @@
     <string name="AutoLogin">auto</string>
     <string name="SwitchVersion">show teacher</string>
     <string name="About">about</string>
-    <string name="UpData">updata</string>
+    <string name="Update">update</string>
     <string name="SwitchAll">show all course</string>
     <string name="SwitchSaveCourseInfo">save course Info</string>
     <string name="Quit">quit</string>
     <string name="QQ">QQ</string>
     <string name="QQ_Number">1411311525</string>
     <string name="GitHub">GitHub</string>
-    <string name="GitHub_Name">Nihfkeol</string>
+    <string name="Name">Nihfkeol</string>
     <string name="Open_Source_License">Use Open Source:</string>
     <string name="OkHttp">OkHttp 4.9.0</string>
     <string name="OkHttp_Info">com.squareup.okhttp3 \n
@@ -29,10 +29,19 @@
     <string name="NotShow">Don\'t Show</string>
     <string name="ShowVersionBtnText">OK</string>
     <string name="VersionInfo">
+        2.2\n
+        \t  MODIFY：\n
+        \t\t    Reorganized the login page and about page layout Added.\n
+        \t  ADD：\n
+        \t\t    Choose your own school start date\n
+        \t\t    Quickly locate to current week\n
+        \t\t    View grades\n
+        \n
         2.1.2\n
-        \t  MODIFY：
-        \t\t    Reduce response time to connect to school servers
-        \t\t    Remove some redundant code
+        \t  MODIFY：\n
+        \t\t    Reduce response time to connect to school servers\n
+        \t\t    Remove some redundant code\n
+        \n
         2.1.1\n
         \t  FIX：\n
         \t\t    Failed to read the local class schedule without a network after saving the class schedule is checked\n
@@ -83,4 +92,9 @@
     <string name="CheckVersionLib_Info">com.github.AlexLiuSheng\n
     https://github.com/AlexLiuSheng/CheckVersionLib
     </string>
+    <string name="Version">Version</string>
+    <string name="Author">Author</string>
+    <string name="BackWeek">>Back To Current Week</string>
+    <string name="setStartDate">Set start date</string>
+    <string name="ScoreWarningText">Please Login</string>
 </resources>
