@@ -39,8 +39,6 @@ class ShowCurriculumFragment : Fragment() {
     private lateinit var cViewModel: CurriculumViewModel
     private lateinit var utilsModel: UtilsModel
 
-    private var courseHTML: String? = ""
-
     //viewpager初始页面
     private var currentItem: Int = 0
 
@@ -127,8 +125,10 @@ class ShowCurriculumFragment : Fragment() {
                 }
 
                 override fun onResponse(call: Call, response: Response) {
-                    courseHTML = response.body!!.string()
-                    msg.what = 1
+                    msg.also {
+                        it.obj = response.body!!.string()
+                        it.what = 1
+                    }
                     myHandler.sendMessage(msg)
                 }
             }
@@ -336,12 +336,12 @@ class ShowCurriculumFragment : Fragment() {
                     requireActivity().finish()
                 }
                 1 -> {
-                    val parseUtils = ParseUtils(courseHTML!!)
+                    val parseUtils = ParseUtils(msg.obj.toString())
                     val versionString = parseUtils.parseVersion(cViewModel.getVersion().value!!)
                     val courseList = parseUtils.parseCourse(versionString)
                     val maxCourse = parseUtils.parseMaxCourse(courseList)
-                    cViewModel.setMaxWeek(maxCourse.getMaxWeek())
-                    cViewModel.setCountCourse(maxCourse.getSetCourse())
+                    cViewModel.setMaxWeek(maxCourse.maxWeek)
+                    cViewModel.setCountCourse(maxCourse.setCourse)
                     showData()
                 }
                 2 -> {

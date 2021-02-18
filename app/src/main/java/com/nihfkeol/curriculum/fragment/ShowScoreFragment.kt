@@ -7,12 +7,12 @@ import android.os.Message
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.SimpleAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
 import com.nihfkeol.curriculum.R
+import com.nihfkeol.curriculum.adapter.TranscriptListViewAdapter
 import com.nihfkeol.curriculum.model.UtilsModel
 import com.nihfkeol.curriculum.utils.NetWorkUtils
 import com.nihfkeol.curriculum.utils.ParseUtils
@@ -29,8 +29,6 @@ class ShowScoreFragment : Fragment() {
     private lateinit var utilsModel: UtilsModel
 
     private val myHandle = MyHandle()
-
-    private var responseHtml: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,8 +69,10 @@ class ShowScoreFragment : Fragment() {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                responseHtml = response.body!!.string()
-                msg.what = 1
+                msg.also {
+                    it.obj = response.body!!.string()
+                    it.what = 1
+                }
                 myHandle.sendMessage(msg)
             }
 
@@ -89,8 +89,10 @@ class ShowScoreFragment : Fragment() {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                responseHtml = response.body!!.string()
-                msg.what = 2
+                msg.also {
+                    it.obj = response.body!!.string()
+                    it.what = 2
+                }
                 myHandle.sendMessage(msg)
             }
         }
@@ -125,7 +127,7 @@ class ShowScoreFragment : Fragment() {
                     Toast.makeText(requireContext(), "网络连接错误，获取课程表失败", Toast.LENGTH_SHORT).show()
                 }
                 1 -> {
-                    val parseUtils = ParseUtils(responseHtml!!)
+                    val parseUtils = ParseUtils(msg.obj.toString())
                     val parseSchoolYearList = parseUtils.parseSchoolYear()
                     val adapter = ArrayAdapter(
                         requireContext(),
@@ -153,15 +155,10 @@ class ShowScoreFragment : Fragment() {
                     }
                 }
                 2 -> {
-                    val parseUtils = ParseUtils(responseHtml!!)
+                    val parseUtils = ParseUtils(msg.obj.toString())
                     val parseScoreList = parseUtils.parseTranscript()
-                    requireView().transcriptListView.adapter = SimpleAdapter(
-                        requireContext(),
-                        parseScoreList,
-                        R.layout.item_transcript,
-                        arrayOf("courseTitle", "score"),
-                        intArrayOf(R.id.courseTitleTextView, R.id.scoreTextView)
-                    )
+                    val adapter = TranscriptListViewAdapter(requireContext(),parseScoreList)
+                    requireView().transcriptListView.adapter = adapter
                 }
             }
         }

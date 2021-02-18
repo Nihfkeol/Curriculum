@@ -38,7 +38,7 @@ class CourseDetailFragment : Fragment() {
     private var week: String? = null
 
     private lateinit var viewModel: CurriculumViewModel
-    private lateinit var utilsModel:UtilsModel
+    private lateinit var utilsModel: UtilsModel
 
     private lateinit var parseUtils: ParseUtils
     private lateinit var courseList: List<Course>
@@ -52,7 +52,6 @@ class CourseDetailFragment : Fragment() {
     private lateinit var fileName: String
     private lateinit var filePath: File
     private val fileUtils = FileUtils().getInstance()!!
-    private var courseHTML: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,7 +92,6 @@ class CourseDetailFragment : Fragment() {
         fileName = requireActivity().resources.getString(R.string.FILE_NAME) + "_" + week
         filePath =
             File(requireActivity().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), fileName)
-        dataTools()
     }
 
     override fun onCreateView(
@@ -101,10 +99,17 @@ class CourseDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_course_detail, container, false)
-        view.showCourseRecyclerView.removeItemDecoration(decoration)
-        view.showCourseRecyclerView.layoutManager = gManager
-        view.showCourseRecyclerView.addItemDecoration(decoration)
+        view.showCourseRecyclerView.also {
+            it.removeItemDecoration(decoration)
+            it.layoutManager = gManager
+            it.addItemDecoration(decoration)
+        }
         return view
+    }
+
+    override fun onStart() {
+        super.onStart()
+        dataTools()
     }
 
     /**
@@ -115,8 +120,7 @@ class CourseDetailFragment : Fragment() {
     private fun dataTools() {
         if (utilsModel.getIsSaveCourseInfo().value!!) {
             if (filePath.exists()) {
-                courseHTML = fileUtils.readHtml(filePath)
-                showData()
+                showData(courseHTML = fileUtils.readHtml(filePath)!!)
             } else {
                 getDataFromNet()
             }
@@ -128,23 +132,22 @@ class CourseDetailFragment : Fragment() {
     /**
      * 展示数据
      */
-    private fun showData() {
-        parseUtils = ParseUtils(courseHTML!!)
+    private fun showData(courseHTML: String) {
+        parseUtils = ParseUtils(courseHTML)
         val versionStr = parseUtils.parseVersion(viewModel.getVersion().value!!)
         courseList = parseUtils.parseCourse(versionStr)
 
-        if (isAdded){
-            adapter =
-                CourseRecyclerViewAdapter(
-                    requireActivity(),
-                    courseList,
-                    viewModel.getWidth().value!!,
-                    utilsModel.getWidthPixels().value!!,
-                    week!!,
-                    viewModel.getCountCourse().value!!
-                )
-            requireView().showCourseRecyclerView.adapter = adapter
-        }
+        adapter =
+            CourseRecyclerViewAdapter(
+                requireActivity(),
+                courseList,
+                viewModel.getWidth().value!!,
+                utilsModel.getWidthPixels().value!!,
+                week!!,
+                viewModel.getCountCourse().value!!
+            )
+        requireView().showCourseRecyclerView.adapter = adapter
+
     }
 
     /**
@@ -162,8 +165,10 @@ class CourseDetailFragment : Fragment() {
                 }
 
                 override fun onResponse(call: Call, response: Response) {
-                    courseHTML = response.body!!.string()
-                    msg.what = 1
+                    msg.also {
+                        it.obj = response.body!!.string()
+                        msg.what = 1
+                    }
                     myHandle.sendMessage(msg)
                 }
             }
@@ -194,21 +199,23 @@ class CourseDetailFragment : Fragment() {
                     /**
                      * 如果勾选了，并且文件不存在，就保存文件
                      */
+                    val courseHTML = msg.obj.toString()
                     if (utilsModel.getIsSaveCourseInfo().value!!) {
                         if (!filePath.exists()) {
-                            fileUtils.writeHtml(courseHTML!!, filePath)
+                            fileUtils.writeHtml(courseHTML, filePath)
                         }
                     }
-                    showData()
+                    showData(courseHTML)
                 }
                 -1 -> {
                     Toast.makeText(requireActivity(), " 网络连接失败", Toast.LENGTH_SHORT).show()
-                    val intent = Intent()
-                    intent.setClass(requireActivity(), LoginActivity::class.java)
-                    intent.putExtra(
-                        requireActivity().resources.getString(R.string.FROM_ACTION),
-                        true
-                    )
+                    val intent = Intent().apply {
+                        setClass(requireActivity(), LoginActivity::class.java)
+                        putExtra(
+                            requireActivity().resources.getString(R.string.FROM_ACTION),
+                            true
+                        )
+                    }
                     startActivity(intent)
                     requireActivity().finish()
 

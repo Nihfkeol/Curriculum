@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="8dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:id="@+id/transcriptItem"
+    style="@style/MyCardView.Style">
 
-    <TextView
-        android:id="@+id/courseTitleTextView"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
-        android:gravity="center"
-        android:textSize="18sp"
-        tools:text="马克思主义基本原理概论" />
+        android:layout_gravity="center"
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/scoreTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textSize="18sp"
-        tools:text="82" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/courseTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:textSize="18sp"
+            tools:text="马克思主义基本原理概论" />
+
+        <TextView
+            android:id="@+id/scoreTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="18sp"
+            tools:text="82" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -9,6 +9,7 @@
     <string name="SwitchAll">显示所有课表</string>
     <string name="SwitchSaveCourseInfo">保存课表信息</string>
     <string name="About">关于</string>
+    <string name="Refresh">刷新</string>
     <string name="Update">更新</string>
     <string name="Quit">退出</string>
     <string name="QQ">QQ</string>
@@ -28,6 +29,9 @@
     <string name="NotShow">不再显示</string>
     <string name="ShowVersionBtnText">确定</string>
     <string name="VersionInfo">
+        提示：\n
+        \t  第一次进入请设置开学日期，路径：课程表->设置->设置开学日期\n
+        \n
         2.2\n
         \t  修改：\n
         \t\t    整理了登录页面和关于页面布局\n
@@ -96,4 +100,6 @@
     <string name="BackWeek">回到当前周</string>
     <string name="setStartDate">设置开学日期</string>
     <string name="ScoreWarningText">请先登录</string>
+    <string name="sliding_menu_course">    课程表</string>
+    <string name="sliding_menu_score">    成绩</string>
 </resources>

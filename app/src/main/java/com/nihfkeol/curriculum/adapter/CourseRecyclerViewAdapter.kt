@@ -3,16 +3,13 @@ package com.nihfkeol.curriculum.adapter
 import android.content.Context
 import android.graphics.Rect
 import android.text.Html
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.nihfkeol.curriculum.R
 import com.nihfkeol.curriculum.pojo.Course
@@ -24,23 +21,22 @@ class CourseRecyclerViewAdapter(
     private val textWidth: Int,
     private val widthPixelsKey: Int,
     private val week: String,
-    private val countCourse: Set<String>
+    countCourse: Set<String>
 ) : RecyclerView.Adapter<CourseRecyclerViewAdapter.MyViewHolder>() {
-    private var itemColors: Array<ItemColor?> = emptyArray()
+    private val itemColors: List<ItemColor>
     private var courseArray: Array<String> = emptyArray()
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
+    init {
         this.courseArray = countCourse.toTypedArray()
         val size = countCourse.size
         val textColors =
             context.resources.getIntArray(R.array.recyclerTextColors).toMutableList()
         val cardViewColors =
             context.resources.getIntArray(R.array.recyclerItemColors).toMutableList()
-        itemColors = arrayOfNulls(size)
-        for (i in itemColors.indices) {
+        itemColors = ArrayList(size)
+        for (i in 0 until size) {
             val j = (cardViewColors.indices).random()
-            itemColors[i] = ItemColor(textColors[j], cardViewColors[j])
+            itemColors.add(ItemColor(textColors[j], cardViewColors[j]))
             textColors.removeAt(j)
             cardViewColors.removeAt(j)
         }
@@ -113,8 +109,11 @@ class CourseRecyclerViewAdapter(
                         classTime += "\n19:10 - 19:50\n20:00 - 20:40\n20:50 - 21:30"
                     }
                 }
-                holder.courseTextView.textSize = 10f
-                holder.courseTextView.text = Html.fromHtml(classTime, Html.FROM_HTML_MODE_COMPACT)
+                holder.courseTextView.also {
+                    it.textSize = 10f
+                    it.text = Html.fromHtml(classTime, Html.FROM_HTML_MODE_COMPACT)
+                }
+
             } else {
                 val courseInfoString = courseInfo.CourseInfoString
                 holder.courseTextView.text = courseInfoString
@@ -139,9 +138,12 @@ class CourseRecyclerViewAdapter(
                     //从课程信息中分解出课程名
                     val cname = courseInfoString!!.split(" ")[0]
                     for (i in courseArray.indices) {
+                        /*
+                        课程名与所有课程中的第i个课程名相符合，就获取第i个颜色
+                         */
                         if (cname == courseArray[i]) {
-                            holder.cView.setCardBackgroundColor(itemColors[i]!!.getCardViewColor())
-                            holder.courseTextView.setTextColor(itemColors[i]!!.getTextColor())
+                            holder.cView.setCardBackgroundColor(itemColors[i].cardViewColor)
+                            holder.courseTextView.setTextColor(itemColors[i].textColor)
                             break
                         }
                     }

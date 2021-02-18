@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.nihfkeol.curriculum.R
+import java.util.*
 
 class UtilsModel(
     application: Application,
@@ -51,13 +52,16 @@ class UtilsModel(
             handle.set(_heightPixelsKey, (dm.heightPixels / 6) * 5)
         }
         if (!handle.contains(_startDateKey)) {
-            handle.set(
-                _startDateKey,
-                shp.getString(
+            val calendar = Calendar.getInstance()
+            with(calendar){
+                handle.set(
                     _startDateKey,
-                    application.resources.getString(R.string.defStringValue)
+                    shp.getString(
+                        _startDateKey,
+                        "${get(Calendar.YEAR)}-${get(Calendar.MONTH)+1}-${get(Calendar.DAY_OF_MONTH)}"
+                    )
                 )
-            )
+            }
         }
 
     }

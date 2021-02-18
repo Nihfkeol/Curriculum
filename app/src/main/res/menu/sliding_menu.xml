@@ -4,10 +4,10 @@
         <item
             android:id="@+id/viewCourseMenu"
             android:icon="@drawable/ic_course"
-            android:title="     课程表" />
+            android:title="@string/sliding_menu_course" />
         <item
             android:id="@+id/viewScoreMenu"
             android:icon="@drawable/ic_score"
-            android:title="     成绩" />
+            android:title="@string/sliding_menu_score" />
     </group>
 </menu>

@@ -148,12 +148,13 @@ class MainActivity : AppCompatActivity() {
      * 注销cookie
      */
     private fun logout() {
-        val msg = Message()
+
         val callback = object : Callback {
             override fun onFailure(call: Call, e: IOException) {
             }
 
             override fun onResponse(call: Call, response: Response) {
+                val msg = Message()
                 msg.what = 1
                 myHandler.sendMessage(msg)
             }

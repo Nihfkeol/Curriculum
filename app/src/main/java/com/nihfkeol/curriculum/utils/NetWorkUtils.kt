@@ -3,6 +3,11 @@ package com.nihfkeol.curriculum.utils
 import okhttp3.*
 import java.util.concurrent.TimeUnit
 
+const val UserAgent = "User-Agent"
+const val UserAgentValue =
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36"
+const val Connection = "Connection"
+const val ConnectionValue = "keep-alive"
 class NetWorkUtils {
     //登录链接
     private val _loginUrl = "http://210.36.80.160/jsxsd/xk/LoginToXk"
@@ -22,11 +27,7 @@ class NetWorkUtils {
 
     //成绩列表
     private val _scoreUrl = "http://210.36.80.160/jsxsd/kscj/cjcx_list"
-    private val _userAgent = "User-Agent"
-    private val _userAgentValue =
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36"
-    private val _connection = "Connection"
-    private val _connectionValue = "keep-alive"
+
     private var _client: OkHttpClient
     private lateinit var requestBuilder: Request.Builder
     private val _cookie = "Cookie"
@@ -34,8 +35,8 @@ class NetWorkUtils {
     constructor(cookie: String) {
         _client = OkHttpClient.Builder().build()
         requestBuilder = Request.Builder()
-            .addHeader(_connection, _connectionValue)
-            .addHeader(_userAgent, _userAgentValue)
+            .addHeader(Connection, ConnectionValue)
+            .addHeader(UserAgent, UserAgentValue)
             .addHeader(_cookie, cookie)
     }
 
@@ -63,8 +64,8 @@ class NetWorkUtils {
         val request: Request = Request.Builder()
             .url(_loginUrl)
             .post(formBody)
-            .addHeader(_connection, _connectionValue)
-            .addHeader(_userAgent, _userAgentValue)
+            .addHeader(Connection, ConnectionValue)
+            .addHeader(UserAgent, UserAgentValue)
             .build()
         _client.newCall(request).enqueue(callback)
     }

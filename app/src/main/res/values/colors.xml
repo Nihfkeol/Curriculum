@@ -6,9 +6,4 @@
     <color name="colorPrimaryLight">#B2EBF2</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondaryText">#757575</color>
-
-    <color name="colorRecyclerOne">#FBB496</color>
-    <color name="colorRecyclerTwo">#FC7A82</color>
-    <color name="colorRecyclerThree">#E1F4DB</color>
-    <color name="colorRecyclerFour">#8AC6D0</color>
 </resources>

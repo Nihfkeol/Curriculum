@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SimpleCurriculum</string>
+    <string name="app_name">Curriculum</string>
     <string name="Login">Login</string>
     <string name="Student_ID">student id</string>
     <string name="PassWord">password</string>
@@ -8,6 +8,7 @@
     <string name="AutoLogin">auto</string>
     <string name="SwitchVersion">show teacher</string>
     <string name="About">about</string>
+    <string name="Refresh">refresh</string>
     <string name="Update">update</string>
     <string name="SwitchAll">show all course</string>
     <string name="SwitchSaveCourseInfo">save course Info</string>
@@ -29,6 +30,9 @@
     <string name="NotShow">Don\'t Show</string>
     <string name="ShowVersionBtnText">OK</string>
     <string name="VersionInfo">
+        Tip：\n
+        \t  The first time you enter please set the start date, Path : Course -> Settings -> Set Start Date\n
+        \n
         2.2\n
         \t  MODIFY：\n
         \t\t    Reorganized the login page and about page layout Added.\n
@@ -97,4 +101,6 @@
     <string name="BackWeek">>Back To Current Week</string>
     <string name="setStartDate">Set start date</string>
     <string name="ScoreWarningText">Please Login</string>
+    <string name="sliding_menu_course">    Course</string>
+    <string name="sliding_menu_score">    Score</string>
 </resources>

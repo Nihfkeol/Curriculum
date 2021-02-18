@@ -2,10 +2,10 @@ package com.nihfkeol.curriculum.utils
 
 import com.nihfkeol.curriculum.pojo.Course
 import com.nihfkeol.curriculum.pojo.MaxCourse
+import com.nihfkeol.curriculum.pojo.Transcript
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
-import kotlin.collections.ArrayList
 
 class ParseUtils(html: String) {
     private lateinit var trElements: Elements
@@ -155,16 +155,13 @@ class ParseUtils(html: String) {
         return list
     }
 
-    fun parseTranscript(): List<Map<String, String>> {
+    fun parseTranscript(): List<Transcript> {
         trElements = document.getElementById("dataList").select("tr")
-        val transcripts = ArrayList<Map<String, String>>()
-        for (element in trElements) {
-            val elements = element.allElements
-            val map = HashMap<String, String>().also {
-                it["courseTitle"] = elements[4].text()
-                it["score"] = elements[5].text()
-            }
-            transcripts.add(map)
+        val transcripts = ArrayList<Transcript>(trElements.size)
+        for (i in trElements.indices) {
+            val elements = trElements[i].allElements
+            val transcript = Transcript(elements[4].text(),elements[5].text())
+            transcripts.add(transcript)
         }
         return transcripts
     }

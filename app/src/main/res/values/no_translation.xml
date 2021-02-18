@@ -78,4 +78,18 @@
         <item>#d6a699</item>
         <item>#957c44</item>
     </array>
+
+    <!--cardViewColor-->
+    <array name="listViewItemColors">
+        <item>#FBB496</item>
+        <item>#FC7A82</item>
+        <item>#E1F4DB</item>
+        <item>#8AC6D0</item>
+    </array>
+    <array name="listViewTextColors">
+        <item>#977465</item>
+        <item>#98575B</item>
+        <item>#8A9487</item>
+        <item>#5F7D82</item>
+    </array>
 </resources>

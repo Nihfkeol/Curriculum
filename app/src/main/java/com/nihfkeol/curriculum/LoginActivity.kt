@@ -26,6 +26,8 @@ import com.nihfkeol.curriculum.model.UtilsModel
 import com.nihfkeol.curriculum.ui.MyBaseDialog
 import com.nihfkeol.curriculum.utils.NetWorkUtils
 import com.nihfkeol.curriculum.utils.ParseUtils
+import com.nihfkeol.curriculum.utils.UserAgent
+import com.nihfkeol.curriculum.utils.UserAgentValue
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.dialog_show_updata_version.*
 import kotlinx.android.synthetic.main.dialog_show_version_info.view.*
@@ -46,64 +48,68 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding: ActivityLoginBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_login)
-        binding.data = myViewModel
-        binding.lifecycleOwner = this
+        binding.also {
+            it.data = myViewModel
+            it.lifecycleOwner = this
+
+            it.checkBoxAuto.setOnClickListener { _ ->
+                val isCheck = it.checkBoxAuto.isChecked
+                myViewModel.setIsAuto(isCheck)
+                //当点击自动登录的时候，保存密码也被打勾
+                if (isCheck) {
+                    myViewModel.setIsSave(isCheck)
+                }
+                //取消保存时，保存按钮状态
+                if (!isCheck) {
+                    myViewModel.saveCheck()
+                }
+            }
+
+            it.checkBoxSave.setOnClickListener { _ ->
+                val isCheck = it.checkBoxSave.isChecked
+                myViewModel.setIsSave(isCheck)
+                //当取消保存密码的时候，保存密码也被取消打勾，保存按钮状态
+                if (!isCheck) {
+                    myViewModel.setIsAuto(isCheck)
+                    myViewModel.saveCheck()
+                }
+            }
+
+            //监听输入框输入状态存入数据
+            it.editTextStudentId.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+
+                override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                    myViewModel.setStudentId(charSequence.toString())
+                }
+
+                override fun afterTextChanged(editable: Editable) {}
+            })
+            it.editTextPassword.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+
+                override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                    myViewModel.setPassword(charSequence.toString())
+                }
+
+                override fun afterTextChanged(editable: Editable) {}
+            })
+
+            //登录
+            it.buttonLogin.setOnClickListener {
+                toLogin()
+            }
+
+            //关于界面
+            it.linearLayoutAbout.setOnClickListener {
+                val intent2 = Intent()
+                intent2.setClass(this, AboutActivity::class.java)
+                startActivity(intent2)
+            }
+        }
+
 
         getHitokoto()
-
-        binding.checkBoxAuto.setOnClickListener {
-            val isCheck = binding.checkBoxAuto.isChecked
-            myViewModel.setIsAuto(isCheck)
-            //当点击自动登录的时候，保存密码也被打勾
-            if (isCheck) {
-                myViewModel.setIsSave(isCheck)
-            }
-            //取消保存时，保存按钮状态
-            if (!isCheck) {
-                myViewModel.saveCheck()
-            }
-        }
-        binding.checkBoxSave.setOnClickListener {
-            val isCheck = binding.checkBoxSave.isChecked
-            myViewModel.setIsSave(isCheck)
-            //当取消保存密码的时候，保存密码也被取消打勾，保存按钮状态
-            if (!isCheck) {
-                myViewModel.setIsAuto(isCheck)
-                myViewModel.saveCheck()
-            }
-        }
-
-        //监听输入框输入状态存入数据
-        binding.editTextStudentId.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                myViewModel.setStudentId(charSequence.toString())
-            }
-
-            override fun afterTextChanged(editable: Editable) {}
-        })
-        binding.editTextPassword.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                myViewModel.setPassword(charSequence.toString())
-            }
-
-            override fun afterTextChanged(editable: Editable) {}
-        })
-
-        //登录
-        binding.buttonLogin.setOnClickListener {
-            toLogin()
-        }
-
-        //关于界面
-        binding.linearLayoutAbout.setOnClickListener {
-            val intent2 = Intent()
-            intent2.setClass(this, AboutActivity::class.java)
-            startActivity(intent2)
-        }
 
         /**
          * 检查更新
@@ -113,8 +119,7 @@ class LoginActivity : AppCompatActivity() {
         val name = packageInfo.versionName
         //设置请求头
         val headers = HttpHeaders()
-        headers["User-Agent"] =
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36"
+        headers[UserAgent] = UserAgentValue
         //下载文件路径
         val file = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)!!
         val downloadBuilder = versionCheckerInstance
@@ -151,40 +156,43 @@ class LoginActivity : AppCompatActivity() {
                 }
 
             })
-        //设置下载路径
-        downloadBuilder.downloadAPKPath = file.toString()
-        //下载安装包命名
-        downloadBuilder.apkName = resources.getString(R.string.app_name)
-        //版本更新提示框
-        downloadBuilder.customVersionDialogListener =
-            CustomVersionDialogListener { context, versionBundle ->
-                val dialog = MyBaseDialog(
-                    context,
-                    R.style.ThemeOverlay_MaterialComponents_Dialog_Alert,
-                    R.layout.dialog_show_updata_version
-                )
-                dialog.tv_title.text = versionBundle.title
-                dialog.tv_msg.text = versionBundle.content
-                dialog.textView_Version_dialog_cancel.setOnClickListener {
-                    downloadBuilder.destory()
-                    versionCheckerInstance.cancelAllMission()
-                    dialog.dismiss()
-                    //取消更新-去判断是否自动跳转
-                    toStartDecide()
+
+        downloadBuilder.apply {
+            //设置下载路径
+            downloadAPKPath = file.toString()
+            //下载安装包命名
+            apkName = resources.getString(R.string.app_name)
+            //版本更新提示框
+            customVersionDialogListener =
+                CustomVersionDialogListener { context, versionBundle ->
+                    val dialog = MyBaseDialog(
+                        context,
+                        R.style.ThemeOverlay_MaterialComponents_Dialog_Alert,
+                        R.layout.dialog_show_updata_version
+                    )
+                    dialog.tv_title.text = versionBundle.title
+                    dialog.tv_msg.text = versionBundle.content
+                    dialog.textView_Version_dialog_cancel.setOnClickListener {
+                        destory()
+                        versionCheckerInstance.cancelAllMission()
+                        dialog.dismiss()
+                        //取消更新-去判断是否自动跳转
+                        toStartDecide()
+                    }
+                    dialog
                 }
-                dialog
-            }
-        //下载失败提示框
-        downloadBuilder.customDownloadFailedListener =
-            CustomDownloadFailedListener { context, _ ->
-                val dialog = MyBaseDialog(
-                    context,
-                    R.style.ThemeOverlay_MaterialComponents_Dialog_Alert,
-                    R.layout.dialog_download_failed
-                )
-                dialog
-            }
-        downloadBuilder.executeMission(applicationContext)
+            //下载失败提示框
+            customDownloadFailedListener =
+                CustomDownloadFailedListener { context, _ ->
+                    val dialog = MyBaseDialog(
+                        context,
+                        R.style.ThemeOverlay_MaterialComponents_Dialog_Alert,
+                        R.layout.dialog_download_failed
+                    )
+                    dialog
+                }
+            executeMission(applicationContext)
+        }
     }
 
     /**
@@ -198,22 +206,26 @@ class LoginActivity : AppCompatActivity() {
         if (!myViewModel.getIsNotShowVersionInfo().value!!) {
             var myBaseDialog: MyBaseDialog? = null
             val view = layoutInflater.inflate(R.layout.dialog_show_version_info, null)
-            view.textViewVersionInfo.text = resources.getString(R.string.VersionInfo)
-            view.checkBoxIsShowVersion.setOnClickListener {
-                val isCheck = view.checkBoxIsShowVersion.isChecked
-                myViewModel.setIsNotShowVersionInfo(isCheck)
-            }
-            view.buttonCancel.setOnClickListener {
-                myBaseDialog!!.cancel()
+            view.also {
+                it.textViewVersionInfo.text = resources.getString(R.string.VersionInfo)
+                it.checkBoxIsShowVersion.setOnClickListener { _ ->
+                    val isCheck = it.checkBoxIsShowVersion.isChecked
+                    myViewModel.setIsNotShowVersionInfo(isCheck)
+                }
+                it.buttonCancel.setOnClickListener {
+                    myBaseDialog!!.cancel()
+                }
             }
             myBaseDialog =
-                MyBaseDialog(this, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert, view)
-            myBaseDialog.show()
-            //设置对话框显示大小
-            val params = myBaseDialog.window!!.attributes
-            params.width = utilsModel.getWidthPixels().value!!
-            params.height = utilsModel.getHeightPixels().value!!
-            myBaseDialog.window!!.attributes = params
+                MyBaseDialog(this, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert, view).apply {
+                    show()
+                    //设置对话框显示大小
+                    val params = window!!.attributes
+                    params.width = utilsModel.getWidthPixels().value!!
+                    params.height = utilsModel.getHeightPixels().value!!
+                    window!!.attributes = params
+                }
+
         }
 
         /**
@@ -240,8 +252,10 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call, response: Response) {
-                    msg.what = 2
-                    msg.obj = response.body!!.string()
+                    msg.also {
+                        it.what = 2
+                        it.obj = response.body!!.string()
+                    }
                     myHandler.sendMessage(msg)
 
                 }
@@ -267,9 +281,9 @@ class LoginActivity : AppCompatActivity() {
         }
         thread {
             val netWorkUtils = NetWorkUtils(cookieJar)
+            val message = Message()
             val callback = object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    val message = Message()
                     message.what = 0
                     myHandler.sendMessage(message)
                 }
@@ -278,9 +292,10 @@ class LoginActivity : AppCompatActivity() {
                     val loginHtml = response.body!!.string()
                     val parseUtils = ParseUtils(loginHtml)
                     val isLogin: Boolean = parseUtils.parseIsLogin()
-                    val message = Message()
-                    message.what = 1
-                    message.obj = isLogin
+                    message.also {
+                        it.what = 1
+                        it.obj = isLogin
+                    }
                     myHandler.sendMessage(message)
                 }
 
