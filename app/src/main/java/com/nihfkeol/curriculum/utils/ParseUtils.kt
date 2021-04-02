@@ -52,7 +52,7 @@ class ParseUtils(html: String) {
             if (i == 0) {
                 //存放星期，并确定courseList的长度
                 val thElements = elementI.getElementsByTag("th")
-                weeks = arrayOfNulls(thElements.size - 2)
+                weeks = arrayOfNulls(thElements.size)
                 for (j in weeks.indices) {
                     weeks[j] = thElements[j].text()
                 }
@@ -88,7 +88,7 @@ class ParseUtils(html: String) {
         for (i in weeks!!.indices) {
             infoList = ArrayList()
             for (key in courseInfoMap.keys) {
-                if (key % 6 == i) {
+                if (key % 8 == i) {
                     infoList.add(courseInfoMap[key]!!)
                 }
             }

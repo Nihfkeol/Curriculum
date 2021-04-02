@@ -34,7 +34,6 @@
     <string name="switchAllImage" translatable="false">switchAllImage</string>
     <string name="updateImage" translatable="false">updateImage</string>
     <string name="clockImage" translatable="false">clockImage</string>
-    <string name="quitImage" translatable="false">quitImage</string>
     <string name="aboutImage" translatable="false">aboutImage</string>
     <string name="aboutActivityImage" translatable="false">icon</string>
     <string name="Brackets_One" translatable="false">『</string>

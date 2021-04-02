@@ -46,7 +46,7 @@ class UtilsModel(
             handle.set(_cookie, application.resources.getString(R.string.defStringValue))
         }
         if (!handle.contains(_widthPixelsKey)) {
-            handle.set(_widthPixelsKey, (dm.widthPixels / 6) * 4)
+            handle.set(_widthPixelsKey, (dm.widthPixels / 8) * 6)
         }
         if (!handle.contains(_heightPixelsKey)) {
             handle.set(_heightPixelsKey, (dm.heightPixels / 6) * 5)

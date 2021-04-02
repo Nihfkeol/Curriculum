@@ -75,7 +75,7 @@ class ShowCurriculumFragment : Fragment() {
         ).get(UtilsModel::class.java)
 
         //TextView的宽度除以6后再减去间隔
-        cViewModel.setWidth(widthPixels / 4 - cViewModel.getMarginLength())
+        cViewModel.setWidth(widthPixels / 6 - cViewModel.getMarginLength())
         netWorkUtils = NetWorkUtils(utilsModel.getCookie().value!!)
 
         utilsModel.getStartDate().observe(requireActivity()) {

@@ -73,7 +73,7 @@ class CourseDetailFragment : Fragment() {
             )
         ).get(UtilsModel::class.java)
 
-        //禁止滑动，设置49格
+        //禁止滑动，竖向设置49格
         gManager = object : GridLayoutManager(context, 49, HORIZONTAL, false) {
             override fun canScrollHorizontally(): Boolean {
                 return false
@@ -136,17 +136,18 @@ class CourseDetailFragment : Fragment() {
         parseUtils = ParseUtils(courseHTML)
         val versionStr = parseUtils.parseVersion(viewModel.getVersion().value!!)
         courseList = parseUtils.parseCourse(versionStr)
-
-        adapter =
-            CourseRecyclerViewAdapter(
-                requireActivity(),
-                courseList,
-                viewModel.getWidth().value!!,
-                utilsModel.getWidthPixels().value!!,
-                week!!,
-                viewModel.getCountCourse().value!!
-            )
-        requireView().showCourseRecyclerView.adapter = adapter
+        if (isAdded) {
+            adapter =
+                CourseRecyclerViewAdapter(
+                    requireActivity(),
+                    courseList,
+                    viewModel.getWidth().value!!,
+                    utilsModel.getWidthPixels().value!!,
+                    week!!,
+                    viewModel.getCountCourse().value!!
+                )
+            requireView().showCourseRecyclerView.adapter = adapter
+        }
 
     }
 

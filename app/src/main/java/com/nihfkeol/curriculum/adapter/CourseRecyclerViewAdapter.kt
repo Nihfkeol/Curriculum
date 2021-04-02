@@ -15,6 +15,14 @@ import com.nihfkeol.curriculum.R
 import com.nihfkeol.curriculum.pojo.Course
 import com.nihfkeol.curriculum.pojo.ItemColor
 
+/**
+ * @param context 上下文
+ * @param courses 课程列表
+ * @param textWidth 文本宽度
+ * @param widthPixelsKey 警告框宽度
+ * @param week 第几周
+ * @param countCourse 总共多少门课
+ */
 class CourseRecyclerViewAdapter(
     private val context: Context,
     private val courses: List<Course>,
@@ -88,55 +96,64 @@ class CourseRecyclerViewAdapter(
             val courseInfo = courseInfoList[position % 7 - 1]
             //差值为一代表第一列，第一列是每节课的时间
             if (difference == 1) {
-                var classTime = "<big><big>" + courseInfo.ClassTime + "</big></big>"
+                var classTime = "<big>" + courseInfo.ClassTime + "</big>"
                 when (position) {
                     1 -> {
-                        classTime += "\n8:30 - 9:10\n9:15 - 9:55"
+                        classTime += "\n8:30-9:10\n9:15-9:55"
                     }
                     2 -> {
-                        classTime += "\n10:10 - 10:50\n10:55 - 11:35"
+                        classTime += "\n10:10-10:50\n10:55-11:35"
                     }
                     3 -> {
-                        classTime += "\n11:40 - 12:20"
+                        classTime += "\n11:40-12:20"
                     }
                     4 -> {
-                        classTime += "\n14:20 - 15:00\n15:05 - 15:45"
+                        classTime += "\n14:20-15:00\n15:05-15:45"
                     }
                     5 -> {
-                        classTime += "\n16:00 - 16:40\n16:45 - 17:25"
+                        classTime += "\n16:00-16:40\n16:45-17:25"
                     }
                     6 -> {
-                        classTime += "\n19:10 - 19:50\n20:00 - 20:40\n20:50 - 21:30"
+                        classTime += "\n19:10-19:50\n20:00-20:40\n20:50-21:30"
                     }
                 }
                 holder.courseTextView.also {
-                    it.textSize = 10f
+                    it.textSize = 8f
                     it.text = Html.fromHtml(classTime, Html.FROM_HTML_MODE_COMPACT)
                 }
 
             } else {
                 val courseInfoString = courseInfo.CourseInfoString
-                holder.courseTextView.text = courseInfoString
-                var split = courseInfoString?.split(" ---------------------- ")
-                /**
-                 * 长度为1，有可能是使用了另一个版本的课程表
-                 * 试着换一种字符串分割
-                 */
-                if (split?.size == 1) {
-                    split = courseInfoString?.split(" --------------------- ")
-                }
                 if ("" != courseInfoString) {
+                    //零时处理字符串，去除周数
+                    val strArr = courseInfoString!!.split(" ")
+                    var s = ""
+                    for (index in strArr.indices){
+                        //去除每节课的周数显示
+                        if (index != strArr.size - 2){
+                            s += strArr[index] + "\n"
+                        }
+                    }
+                    holder.courseTextView.text = s
+                    var split = courseInfoString.split(" ---------------------- ")
+                    /**
+                     * 长度为1，有可能是使用了另一个版本的课程表
+                     * 试着换一种字符串分割
+                     */
+                    if (split.size == 1) {
+                        split = courseInfoString.split(" --------------------- ")
+                    }
                     isShowDialog = true
                     alertDialogBuilder.setAdapter(
                         ArrayAdapter(
                             context,
                             android.R.layout.simple_list_item_1,
-                            split!!
+                            split
                         ), null
                     )
 
                     //从课程信息中分解出课程名
-                    val cname = courseInfoString!!.split(" ")[0]
+                    val cname = courseInfoString.split(" ")[0]
                     for (i in courseArray.indices) {
                         /*
                         课程名与所有课程中的第i个课程名相符合，就获取第i个颜色

@@ -9,15 +9,23 @@ android {
         applicationId "com.nihfkeol.curriculum"
         minSdkVersion 27
         targetSdkVersion 29
-        versionCode 7
-        versionName "2.2.1"
+        versionCode 8
+        versionName "2.2.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        resConfigs 'en','zh-rCN'
+        ndk{
+            abiFilters 'armeabi-v7a','x86'
+        }
     }
 
     buildTypes {
         release {
+            //开启代码混淆
             minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

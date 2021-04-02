@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
     android:src="@drawable/cool_background"
-    android:tileMode="disabled"
+    android:tileMode="mirror"
     android:dither="true"
-    android:gravity="start"
+    android:gravity="left"
     >
 
 </bitmap>

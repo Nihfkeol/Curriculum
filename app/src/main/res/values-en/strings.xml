@@ -10,7 +10,6 @@
     <string name="About">about</string>
     <string name="Refresh">refresh</string>
     <string name="Update">update</string>
-    <string name="SwitchAll">show all course</string>
     <string name="SwitchSaveCourseInfo">save course Info</string>
     <string name="Quit">quit</string>
     <string name="QQ">QQ</string>
@@ -30,64 +29,8 @@
     <string name="NotShow">Don\'t Show</string>
     <string name="ShowVersionBtnText">OK</string>
     <string name="VersionInfo">
-        Tip：\n
+        UsingHelp：\n
         \t  The first time you enter please set the start date, Path : Course -> Settings -> Set Start Date\n
-        \n
-        2.2\n
-        \t  MODIFY：\n
-        \t\t    Reorganized the login page and about page layout Added.\n
-        \t  ADD：\n
-        \t\t    Choose your own school start date\n
-        \t\t    Quickly locate to current week\n
-        \t\t    View grades\n
-        \n
-        2.1.2\n
-        \t  MODIFY：\n
-        \t\t    Reduce response time to connect to school servers\n
-        \t\t    Remove some redundant code\n
-        \n
-        2.1.1\n
-        \t  FIX：\n
-        \t\t    Failed to read the local class schedule without a network after saving the class schedule is checked\n
-        \n
-        2.1\n
-        \t  ADD:\n
-        \t\t    Automatic update detection\n
-        \t\t    Display version information\n
-        \t\t    Show Hitokoto\n
-        \t  FIX:\n
-        \t\t    Check button problems\n
-        \n
-        2.0\n
-        \t  MODIFY:\n
-        \t\t    Use kotlin Refactoring\n
-        \t\t    Remove all class schedules from display, Switch to single week display\n
-        \t\t    The same lesson each week is represented by the same color\n
-        \t\t    Remove the automatic saving of class schedules to local, save or not save according to personal preference.\n
-        \t\t    Do not save cookies locally\n
-        \t  ADD:\n
-        \t\t    Log out of current account\n
-        \t  FIX:\n
-        \t\t    Error showing the current week\n
-        \n
-        1.2\n
-        \t  FIX:\n
-        \t\t    Check button problems\n
-        \t\t    The dialog box list style does not display neatly after switching the class schedule version.\n
-        \t  ADD:\n
-        \t\t    New UI display\n
-        \n
-        1.1\n
-        \t  FIX:\n
-        \t\t    Network Connection Error Problem\n
-        \t  MODIFY:\n
-        \t\t    UI Display\n
-        \t  ADD:\n
-        \t\t    Switching class schedule versions\n
-        \t\t    Store class schedules locally in case the school\'s server goes down.\n
-        \n
-        1.0\n
-        \t Curriculum
     </string>
     <string name="DownloadFail">DownloadFail</string>
     <string name="Cancel">Cancel</string>
@@ -100,7 +43,6 @@
     <string name="Author">Author</string>
     <string name="BackWeek">>Back To Current Week</string>
     <string name="setStartDate">Set start date</string>
-    <string name="ScoreWarningText">Please Login</string>
     <string name="sliding_menu_course">    Course</string>
     <string name="sliding_menu_score">    Score</string>
 </resources>
