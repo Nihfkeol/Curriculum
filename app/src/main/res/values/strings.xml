@@ -27,9 +27,19 @@
     <string name="Setting">设置</string>
     <string name="NotShow">不再显示</string>
     <string name="ShowVersionBtnText">确定</string>
-    <string name="VersionInfo">
+    <string name="HelpInfo">
         使用帮助：\n
         \t  第一次进入请设置开学日期，路径：课程表->设置->设置开学日期\n
+        \n
+        \t 需要使用桌面微件，需要设置保存课表到本地
+        \n
+        \t 勾选不在显示后，想要再次显示使用帮助，路径：关于->点击课程表
+    </string>
+    <string name="HelpInfo2">
+        使用帮助：\n
+        \t  第一次进入请设置开学日期，路径：课程表->设置->设置开学日期\n
+        \n
+        \t 需要使用桌面微件，需要设置保存课表到本地
     </string>
     <string name="DownloadFail">下载失败</string>
     <string name="Cancel">取消</string>
@@ -44,6 +54,7 @@
     <string name="setStartDate">设置开学日期</string>
     <string name="sliding_menu_course">    课程表</string>
     <string name="sliding_menu_score">    成绩</string>
-<!--    <string name="appwidget_text">请在App内设置保存课表信息</string>-->
+    <string name="ShowSidebar">显示侧边栏</string>
+    <!--    <string name="appwidget_text">请在App内设置保存课表信息</string>-->
 <!--    <string name="add_widget">Add widget</string>-->
 </resources>

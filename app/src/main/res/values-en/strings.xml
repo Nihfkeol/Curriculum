@@ -28,9 +28,19 @@
     <string name="Setting">Setting</string>
     <string name="NotShow">Don\'t Show</string>
     <string name="ShowVersionBtnText">OK</string>
-    <string name="VersionInfo">
+    <string name="HelpInfo">
         UsingHelp：\n
         \t  The first time you enter please set the start date, Path : Course -> Settings -> Set Start Date\n
+        \n
+        \t If want to using widget, need to set save course Info
+        \n
+        \t After checking the box not to show, want to show the use of help again, the path: About -> Click on the Curriculum
+    </string>
+    <string name="HelpInfo2">
+        UsingHelp：\n
+        \t  The first time you enter please set the start date, Path : Course -> Settings -> Set Start Date\n
+        \n
+        \t If want to using widget, need to set save course Info
     </string>
     <string name="DownloadFail">DownloadFail</string>
     <string name="Cancel">Cancel</string>
@@ -45,4 +55,5 @@
     <string name="setStartDate">Set start date</string>
     <string name="sliding_menu_course">    Course</string>
     <string name="sliding_menu_score">    Score</string>
+    <string name="ShowSidebar">Show Sidebar</string>
 </resources>

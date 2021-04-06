@@ -199,7 +199,8 @@ class LoginActivity : AppCompatActivity() {
      * 页面自动跳转逻辑
      */
     private fun toStartDecide() {
-
+        //获取是否自动登录
+        val isCheckAuto = myViewModel.getIsAuto().value!!
         /**
          * 用Dialog显示版本信息
          */
@@ -207,13 +208,17 @@ class LoginActivity : AppCompatActivity() {
             var myBaseDialog: MyBaseDialog? = null
             val view = layoutInflater.inflate(R.layout.dialog_show_version_info, null)
             view.also {
-                it.textViewVersionInfo.text = resources.getString(R.string.VersionInfo)
+                it.textViewVersionInfo.text = resources.getString(R.string.HelpInfo)
                 it.checkBoxIsShowVersion.setOnClickListener { _ ->
                     val isCheck = it.checkBoxIsShowVersion.isChecked
                     myViewModel.setIsNotShowVersionInfo(isCheck)
                 }
                 it.buttonCancel.setOnClickListener {
                     myBaseDialog!!.cancel()
+                    //如果自动登录就跳转
+                    if (isCheckAuto) {
+                        toLogin()
+                    }
                 }
             }
             myBaseDialog =
@@ -222,24 +227,24 @@ class LoginActivity : AppCompatActivity() {
                     //设置对话框显示大小
                     val params = window!!.attributes
                     params.width = utilsModel.getWidthPixels().value!!
-                    params.height = utilsModel.getHeightPixels().value!!
                     window!!.attributes = params
                 }
 
-        }
-
-        /**
-         * 每次进入这个activity，判断是不是从另一个activity跳转过来的，
-         * 如果是就不跳转，不自动登录
-         */
-        val intent = intent
-        if (!intent.hasExtra(resources.getString(R.string.FROM_ACTION))) {
-            val isCheckAuto = myViewModel.getIsAuto().value!!
-            //如果自动登录就跳转
-            if (isCheckAuto) {
-                toLogin()
+        }else{
+            /**
+             * 每次进入这个activity，判断是不是从另一个activity跳转过来的，
+             * 如果是就不跳转，不自动登录
+             */
+            val intent = intent
+            if (!intent.hasExtra(resources.getString(R.string.FROM_ACTION))) {
+                //如果自动登录就跳转
+                if (isCheckAuto) {
+                    toLogin()
+                }
             }
         }
+
+
 
     }
 

@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_about.*
 import java.lang.Exception
 
@@ -15,6 +16,14 @@ class AboutActivity : AppCompatActivity() {
 
         val packageInfo = packageManager.getPackageInfo(packageName, 0)
         textViewShowVersion.text = packageInfo.versionName
+
+        linearLayoutHelpInfo.setOnClickListener {
+            AlertDialog.Builder(this).also {
+                it.setMessage(resources.getString(R.string.HelpInfo2))
+                it.setCancelable(true)
+                it.create()
+            }.show()
+        }
 
         linearLayoutQQ.setOnClickListener {
             try {
