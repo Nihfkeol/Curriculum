@@ -14,9 +14,24 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
-        <activity android:name=".AboutActivity"/>
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait"/>
+
+        <service android:name=".widget.CourseOfDayListViewService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+
+        <receiver android:name=".widget.CurriculumWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/curriculum_widget_info" />
+        </receiver>
+
+        <activity android:name=".AboutActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

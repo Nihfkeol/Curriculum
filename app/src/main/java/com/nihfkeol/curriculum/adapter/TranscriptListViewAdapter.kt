@@ -68,7 +68,7 @@ class TranscriptListViewAdapter(
         return view
     }
 
-    class MyViewHolder(view: View) {
+    private class MyViewHolder(view: View) {
         val courseTitleTextView: TextView = view.findViewById(R.id.courseTitleTextView)
         val scoreTextView: TextView = view.findViewById(R.id.scoreTextView)
         val transcriptItem: CardView = view.findViewById(R.id.transcriptItem)

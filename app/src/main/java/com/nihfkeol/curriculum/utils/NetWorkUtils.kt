@@ -32,6 +32,7 @@ class NetWorkUtils {
     private lateinit var requestBuilder: Request.Builder
     private val _cookie = "Cookie"
 
+    //获取课表/成绩使用
     constructor(cookie: String) {
         _client = OkHttpClient.Builder().build()
         requestBuilder = Request.Builder()
@@ -40,10 +41,12 @@ class NetWorkUtils {
             .addHeader(_cookie, cookie)
     }
 
+    //一言使用
     constructor() {
         _client = OkHttpClient.Builder().build()
     }
 
+    //登录使用
     constructor(cookieJar: CookieJar) {
         _client =
             OkHttpClient.Builder().connectTimeout(3, TimeUnit.SECONDS).cookieJar(cookieJar).build()
@@ -66,17 +69,6 @@ class NetWorkUtils {
             .post(formBody)
             .addHeader(Connection, ConnectionValue)
             .addHeader(UserAgent, UserAgentValue)
-            .build()
-        _client.newCall(request).enqueue(callback)
-    }
-
-    /**
-     * 获取课程表网络连接的方法
-     * @param callback 回调方法
-     */
-    fun getCourseHTML(callback: Callback) {
-        val request = requestBuilder
-            .url(_courseUrl)
             .build()
         _client.newCall(request).enqueue(callback)
     }

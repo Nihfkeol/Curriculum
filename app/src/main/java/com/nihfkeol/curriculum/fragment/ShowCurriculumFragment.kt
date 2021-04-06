@@ -46,7 +46,7 @@ class ShowCurriculumFragment : Fragment() {
     private var nowWeek: Int = 0
 
     private val myHandler = MyHandler()
-    private lateinit var netWorkUtils:NetWorkUtils
+    private lateinit var netWorkUtils: NetWorkUtils
 
     private var maxWeek: Int = 0
 
@@ -132,7 +132,7 @@ class ShowCurriculumFragment : Fragment() {
                     myHandler.sendMessage(msg)
                 }
             }
-            netWorkUtils.getCourseHTML(callback)
+            netWorkUtils.getCourseHTML(callback, "")
         }
     }
 
@@ -259,7 +259,7 @@ class ShowCurriculumFragment : Fragment() {
                 val dialog = DatePickerDialog(
                     requireContext(),
                     { _, year, month, dayOfMonth ->
-                        val dateStr = "$year-${month+1}-$dayOfMonth"
+                        val dateStr = "$year-${month + 1}-$dayOfMonth"
                         getMaxWeek()
                         utilsModel.setStartDate(dateStr)
                     },

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/countTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        tools:text="6"/>
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:textColor="@android:color/black"
+        android:textSize="10sp"
+        tools:text="19:10-19:50\n20:00-20:40\n20:50-21:30"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/courseInfoTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:layout_weight="4"
+        android:textSize="12sp"
+        android:textColor="@android:color/black"
+        tools:text="职业教育"/>
+</LinearLayout>

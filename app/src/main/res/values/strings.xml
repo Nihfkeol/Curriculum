@@ -44,4 +44,6 @@
     <string name="setStartDate">设置开学日期</string>
     <string name="sliding_menu_course">    课程表</string>
     <string name="sliding_menu_score">    成绩</string>
+<!--    <string name="appwidget_text">请在App内设置保存课表信息</string>-->
+<!--    <string name="add_widget">Add widget</string>-->
 </resources>

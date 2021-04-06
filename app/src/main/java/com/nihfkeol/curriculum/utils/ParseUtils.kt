@@ -131,8 +131,14 @@ class ParseUtils(html: String) {
                     } else {
                         weekStr = weekArr[1]
                     }
+                    //长度小于5的肯定不是这个学期最后一周
                     if (weekStr.length != 5) continue
-                    val weekNum = weekStr.substring(0, 2).toInt()
+                    //防止出现“7(单周)”这样的
+                    val weekNum = try {
+                        weekStr.substring(0, 2).toInt()
+                    }catch (e : Exception){
+                        continue
+                    }
                     if (maxWeek < weekNum) {
                         maxWeek = weekNum
                     }
