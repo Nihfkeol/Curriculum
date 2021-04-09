@@ -204,14 +204,14 @@ class LoginActivity : AppCompatActivity() {
         /**
          * 用Dialog显示版本信息
          */
-        if (!myViewModel.getIsNotShowVersionInfo().value!!) {
+        if (!myViewModel.getIsNotShowHelpInfo().value!!) {
             var myBaseDialog: MyBaseDialog? = null
             val view = layoutInflater.inflate(R.layout.dialog_show_version_info, null)
             view.also {
                 it.textViewVersionInfo.text = resources.getString(R.string.HelpInfo)
                 it.checkBoxIsShowVersion.setOnClickListener { _ ->
                     val isCheck = it.checkBoxIsShowVersion.isChecked
-                    myViewModel.setIsNotShowVersionInfo(isCheck)
+                    myViewModel.setIsNotShowHelpInfo(isCheck)
                 }
                 it.buttonCancel.setOnClickListener {
                     myBaseDialog!!.cancel()

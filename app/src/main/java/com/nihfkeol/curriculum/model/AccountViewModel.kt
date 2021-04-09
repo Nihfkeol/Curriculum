@@ -26,8 +26,8 @@ class AccountViewModel(application: Application, private val handle: SavedStateH
 
     private val _isSaveCourseInfoKey = application.resources.getString(R.string.IS_SAVE_COURSE_KEY)
 
-    private val _isNotShowVersionInfoKey =
-        application.resources.getString(R.string.IS_NOT_SHOW_VERSION_INFO_KEY)
+    private val _isNotShowHelpInfoKey =
+        application.resources.getString(R.string.IS_NOT_SHOW_HELP_INFO_KEY)
 
     init {
         val defString = application.getString(R.string.defStringValue)
@@ -49,8 +49,8 @@ class AccountViewModel(application: Application, private val handle: SavedStateH
         if (!handle.contains(_isSaveCourseInfoKey)) {
             handle.set(_isSaveCourseInfoKey, shp.getBoolean(_isSaveCourseInfoKey, defBool))
         }
-        if (!handle.contains(_isNotShowVersionInfoKey)) {
-            handle.set(_isNotShowVersionInfoKey, shp.getBoolean(_isNotShowVersionInfoKey, defBool))
+        if (!handle.contains(_isNotShowHelpInfoKey)) {
+            handle.set(_isNotShowHelpInfoKey, shp.getBoolean(_isNotShowHelpInfoKey, defBool))
         }
     }
 
@@ -111,15 +111,15 @@ class AccountViewModel(application: Application, private val handle: SavedStateH
         return handle.getLiveData(_isSaveCourseInfoKey)
     }
 
-    fun setIsNotShowVersionInfo(isShow: Boolean) {
-        handle.set(_isNotShowVersionInfoKey, isShow)
+    fun setIsNotShowHelpInfo(isShow: Boolean) {
+        handle.set(_isNotShowHelpInfoKey, isShow)
         val edit = shp.edit()
-        edit.putBoolean(_isNotShowVersionInfoKey, isShow)
+        edit.putBoolean(_isNotShowHelpInfoKey, isShow)
         edit.apply()
     }
 
-    fun getIsNotShowVersionInfo(): MutableLiveData<Boolean> {
-        return handle.getLiveData(_isNotShowVersionInfoKey)
+    fun getIsNotShowHelpInfo(): MutableLiveData<Boolean> {
+        return handle.getLiveData(_isNotShowHelpInfoKey)
     }
 
 }

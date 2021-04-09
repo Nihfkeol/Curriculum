@@ -22,7 +22,7 @@
     <string name="COUNT_COURSE_KEY" translatable="false">COUNT_COURSE</string>
     <!--是否保存课表信息在本地的key-->
     <string name="IS_SAVE_COURSE_KEY" translatable="false">SAVE_COURSE</string>
-    <string name="IS_NOT_SHOW_VERSION_INFO_KEY" translatable="false">NOT_SHOW_VERSION_INFO</string>
+    <string name="IS_NOT_SHOW_HELP_INFO_KEY" translatable="false">NOT_SHOW_HELP_INFO</string>
     <string name="WIDTH_PIXELS_KEY" translatable="false">WIDTH_PIXELS_KEY</string>
     <string name="HEIGHT_PIXELS_KEY" translatable="false">HEIGHT_PIXELS_KEY</string>
     <string name="START_DATE_KEY" translatable="false">START_DATE_KEY</string>
