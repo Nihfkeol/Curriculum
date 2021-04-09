@@ -2,32 +2,34 @@ package com.nihfkeol.curriculum.widget
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.nihfkeol.curriculum.R
 
 class CourseOfDayListViewService : RemoteViewsService() {
     override fun onGetViewFactory(intent: Intent?): RemoteViewsFactory {
-        return ListRemoteViewsFactory(this.applicationContext, intent)
+        return ListRemoteViewsFactory(this.applicationContext)
     }
 
     inner class ListRemoteViewsFactory(
-        private val context: Context,
-        private val intent: Intent?
+        private val context: Context
     ) : RemoteViewsFactory {
         private lateinit var courseList : List<String>
+        private var textColor : Int = 0
+
+        private val shp = context.getSharedPreferences(
+            context.getString(R.string.SHP_NAME),
+            Context.MODE_PRIVATE
+        )
 
         override fun onCreate() {
-            intent.hashCode()
         }
 
         override fun onDataSetChanged() {
-            val courseOfDayStr = context.getSharedPreferences(
-                context.getString(R.string.SHP_NAME),
-                Context.MODE_PRIVATE
-            ).getString("courseListKEY","")
+            val courseOfDayStr = shp.getString("courseListKEY","")
             courseList = courseOfDayStr!!.split("#")
-
+            textColor = Color.parseColor(shp.getString(context.resources.getString(R.string.WIDGET_TEXT_COLOR_KEY), "#000000"))
         }
 
         override fun onDestroy() {
@@ -42,8 +44,11 @@ class CourseOfDayListViewService : RemoteViewsService() {
             val str = courseList[position]
             val strArr = str.split(",")
             return RemoteViews(context.packageName, R.layout.item_course_of_day).apply {
+                setTextColor(R.id.countTextView,textColor)
                 setTextViewText(R.id.countTextView, strArr[0])
+                setTextColor(R.id.timeTextView,textColor)
                 setTextViewText(R.id.timeTextView,splitStr(strArr[1]))
+                setTextColor(R.id.courseInfoTextView,textColor)
                 setTextViewText(R.id.courseInfoTextView,splitStr(strArr[2]))
             }
         }

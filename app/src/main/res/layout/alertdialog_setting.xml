@@ -112,7 +112,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/updateMenu"
+            android:id="@+id/setWidgetColorMenu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"
@@ -126,6 +126,34 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
+                android:contentDescription="@string/colorImage"
+                app:srcCompat="@drawable/ic_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/imageView4"
+                android:text="@string/setWidgetTextColor"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/updateMenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:foreground="?selectableItemBackground">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:contentDescription="@string/updateImage"
                 app:srcCompat="@drawable/ic_refresh" />
 
@@ -134,7 +162,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
-                android:layout_toEndOf="@id/imageView4"
+                android:layout_toEndOf="@id/imageView5"
                 android:text="@string/Refresh"
                 android:textSize="16sp" />
         </RelativeLayout>
@@ -150,7 +178,7 @@
             android:foreground="?selectableItemBackground">
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/imageView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -163,7 +191,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
-                android:layout_toEndOf="@id/imageView5"
+                android:layout_toEndOf="@id/imageView6"
                 android:text="@string/About"
                 android:textSize="16sp" />
         </RelativeLayout>

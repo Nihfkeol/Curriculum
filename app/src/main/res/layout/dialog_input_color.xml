@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MyCardView.Style"
+    android:id="@+id/inputColorCardView"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/inputColorEditText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:ems="10"
+        android:hint="@string/inputColorHint"
+        android:inputType="textPersonName"
+        android:importantForAutofill="no" />
+</androidx.cardview.widget.CardView>

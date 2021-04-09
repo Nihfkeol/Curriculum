@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">课程表</string>
+    <string name="app_name">N-课表</string>
     <string name="Login">登录</string>
     <string name="Student_ID">学号</string>
     <string name="PassWord">密码</string>
@@ -55,6 +55,8 @@
     <string name="sliding_menu_course">    课程表</string>
     <string name="sliding_menu_score">    成绩</string>
     <string name="ShowSidebar">显示侧边栏</string>
+    <string name="setWidgetTextColor">微件字体颜色</string>
+    <string name="inputColorHint">请输入16进制的颜色</string>
     <!--    <string name="appwidget_text">请在App内设置保存课表信息</string>-->
 <!--    <string name="add_widget">Add widget</string>-->
 </resources>

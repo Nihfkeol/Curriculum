@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.os.Message
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -75,29 +73,13 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
 
-            //监听输入框输入状态存入数据
-            it.editTextStudentId.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-
-                override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                    myViewModel.setStudentId(charSequence.toString())
-                }
-
-                override fun afterTextChanged(editable: Editable) {}
-            })
-            it.editTextPassword.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-
-                override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                    myViewModel.setPassword(charSequence.toString())
-                }
-
-                override fun afterTextChanged(editable: Editable) {}
-            })
-
             //登录
-            it.buttonLogin.setOnClickListener {
-                toLogin()
+            it.buttonLogin.setOnClickListener {_->
+                if(it.editTextStudentId.text.toString() != "" && it.editTextPassword.text.toString() != ""){
+                    toLogin()
+                }else{
+                    Toast.makeText(applicationContext,"请输入帐号密码",Toast.LENGTH_SHORT).show()
+                }
             }
 
             //关于界面
@@ -215,14 +197,14 @@ class LoginActivity : AppCompatActivity() {
                 }
                 it.buttonCancel.setOnClickListener {
                     myBaseDialog!!.cancel()
-                    //如果自动登录就跳转
-                    if (isCheckAuto) {
-                        toLogin()
-                    }
                 }
             }
             myBaseDialog =
-                MyBaseDialog(this, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert, view).apply {
+                MyBaseDialog(
+                    this,
+                    R.style.ThemeOverlay_MaterialComponents_Dialog_Alert,
+                    view
+                ).apply {
                     show()
                     //设置对话框显示大小
                     val params = window!!.attributes
@@ -230,7 +212,7 @@ class LoginActivity : AppCompatActivity() {
                     window!!.attributes = params
                 }
 
-        }else{
+        } else {
             /**
              * 每次进入这个activity，判断是不是从另一个activity跳转过来的，
              * 如果是就不跳转，不自动登录
@@ -243,7 +225,6 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
-
 
 
     }
@@ -306,8 +287,8 @@ class LoginActivity : AppCompatActivity() {
 
             }
             netWorkUtils.isLogin(
-                myViewModel.getStudentId().value!!,
-                myViewModel.getPassword().value!!,
+                editTextStudentId.text.toString(),
+                editTextPassword.text.toString(),
                 callback
             )
         }
@@ -356,6 +337,8 @@ class LoginActivity : AppCompatActivity() {
                         val intent = Intent()
                         if (myViewModel.getIsSave().value!!) {
                             //如果勾选了保存，那么就保存账户
+                            myViewModel.setStudentId(editTextStudentId.text.toString())
+                            myViewModel.setPassword(editTextPassword.text.toString())
                             myViewModel.saveAccount()
                         } else {
                             myViewModel.clearAccount()

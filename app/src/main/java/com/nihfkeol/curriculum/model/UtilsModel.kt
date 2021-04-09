@@ -30,6 +30,8 @@ class UtilsModel(
     //储存开学时间的key
     private val _startDateKey = application.resources.getString(R.string.START_DATE_KEY)
 
+    private val _widgetTextColorKey = application.resources.getString(R.string.WIDGET_TEXT_COLOR_KEY)
+
     //shp文件的名字
     private val _shpName = application.resources.getString(R.string.SHP_NAME)
     private val shp = application
@@ -102,5 +104,16 @@ class UtilsModel(
 
     fun getStartDate(): MutableLiveData<String> {
         return handle.getLiveData(_startDateKey)
+    }
+
+    fun getWidgetTextColor() : String?{
+        return shp.getString(_widgetTextColorKey,"")
+    }
+
+    fun setWidgetTextColor(color: String) {
+        shp.edit().also {
+            it.putString(_widgetTextColorKey, color)
+            it.apply()
+        }
     }
 }

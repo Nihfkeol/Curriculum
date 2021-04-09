@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Curriculum</string>
+    <string name="app_name">N-Curriculum</string>
     <string name="Login">Login</string>
     <string name="Student_ID">student id</string>
     <string name="PassWord">password</string>
@@ -52,8 +52,10 @@
     <string name="Version">Version</string>
     <string name="Author">Author</string>
     <string name="BackWeek">>Back To Current Week</string>
-    <string name="setStartDate">Set start date</string>
+    <string name="setStartDate">set start date</string>
     <string name="sliding_menu_course">    Course</string>
     <string name="sliding_menu_score">    Score</string>
     <string name="ShowSidebar">Show Sidebar</string>
+    <string name="setWidgetTextColor">set widget font color</string>
+    <string name="inputColorHint">please enter the hex color</string>
 </resources>

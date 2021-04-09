@@ -1,5 +1,6 @@
 <resources>
     <declare-styleable name="AppWidgetAttrs">
+        <attr name="appWidgetLayoutColor" format="color"/>
         <attr name="appWidgetTextColor" format="color" />
     </declare-styleable>
 </resources>

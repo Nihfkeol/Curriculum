@@ -3,12 +3,16 @@ package com.nihfkeol.curriculum.fragment
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.os.Message
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
@@ -24,6 +28,7 @@ import com.nihfkeol.curriculum.utils.FileUtils
 import com.nihfkeol.curriculum.utils.NetWorkUtils
 import com.nihfkeol.curriculum.utils.ParseUtils
 import kotlinx.android.synthetic.main.alertdialog_setting.view.*
+import kotlinx.android.synthetic.main.dialog_input_color.view.*
 import kotlinx.android.synthetic.main.fragment_show_curriculum.view.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -274,6 +279,48 @@ class ShowCurriculumFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
             }
+
+            it.setWidgetColorMenu.setOnClickListener {
+                val inputColorView =
+                    layoutInflater.inflate(R.layout.dialog_input_color, null).apply {
+                        inputColorEditText.addTextChangedListener(object : TextWatcher {
+                            override fun beforeTextChanged(
+                                s: CharSequence?,
+                                start: Int,
+                                count: Int,
+                                after: Int
+                            ) {
+                            }
+
+                            override fun onTextChanged(
+                                s: CharSequence?,
+                                start: Int,
+                                before: Int,
+                                count: Int
+                            ) {
+                                try {
+                                    inputColorCardView.setBackgroundColor(Color.parseColor(s.toString()))
+                                } catch (e: Exception) {
+                                }
+                            }
+
+                            override fun afterTextChanged(s: Editable?) {
+                            }
+                        })
+                    }
+                inputColorView.inputColorEditText.setText(utilsModel.getWidgetTextColor())
+                if (utilsModel.getWidgetTextColor() != ""){
+                    inputColorView.inputColorCardView.setBackgroundColor(Color.parseColor(utilsModel.getWidgetTextColor()))
+                }
+                AlertDialog.Builder(requireContext()).apply {
+                    setView(inputColorView)
+                    setPositiveButton("确定") { _, _ ->
+                        utilsModel.setWidgetTextColor(inputColorView.inputColorEditText.text.toString())
+                    }
+                    show()
+                }
+            }
+
             //更新数据
             it.updateMenu.setOnClickListener {
                 if (utilsModel.getIsSaveCourseInfo().value!!) {

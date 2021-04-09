@@ -26,6 +26,7 @@
     <string name="WIDTH_PIXELS_KEY" translatable="false">WIDTH_PIXELS_KEY</string>
     <string name="HEIGHT_PIXELS_KEY" translatable="false">HEIGHT_PIXELS_KEY</string>
     <string name="START_DATE_KEY" translatable="false">START_DATE_KEY</string>
+    <string name="WIDGET_TEXT_COLOR_KEY" translatable="false">WIDGET_TEXT_COLOR_KEY</string>
     <!-- 默认值 -->
     <string name="defStringValue" translatable="false"/>
     <bool name="defBool">false</bool>
@@ -34,6 +35,7 @@
     <string name="switchAllImage" translatable="false">switchAllImage</string>
     <string name="updateImage" translatable="false">updateImage</string>
     <string name="clockImage" translatable="false">clockImage</string>
+    <string name="colorImage" translatable="false">colorImage</string>
     <string name="aboutImage" translatable="false">aboutImage</string>
     <string name="aboutActivityImage" translatable="false">icon</string>
     <string name="Brackets_One" translatable="false">『</string>
@@ -84,11 +86,15 @@
         <item>#FC7A82</item>
         <item>#E1F4DB</item>
         <item>#8AC6D0</item>
+        <item>#AF8AC2</item>
+        <item>#CADED8</item>
     </array>
     <array name="listViewTextColors">
         <item>#977465</item>
         <item>#98575B</item>
         <item>#8A9487</item>
         <item>#5F7D82</item>
+        <item>#715F7B</item>
+        <item>#7F8986</item>
     </array>
 </resources>

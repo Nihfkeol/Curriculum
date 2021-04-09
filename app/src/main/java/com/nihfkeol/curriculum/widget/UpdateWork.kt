@@ -20,7 +20,7 @@ class UpdateWork(val context: Context, workerParams: WorkerParameters) :
     Worker(context, workerParams) {
     override fun doWork(): Result {
         //创建视图
-        val views = RemoteViews(context.packageName, R.layout.curriculum_widget)
+        val views = RemoteViews(context.packageName, R.layout.widget_curriculum)
         val shp = context.getSharedPreferences(
             context.getString(R.string.SHP_NAME),
             Context.MODE_PRIVATE

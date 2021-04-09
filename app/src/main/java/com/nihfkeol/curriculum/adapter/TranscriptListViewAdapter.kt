@@ -58,7 +58,7 @@ class TranscriptListViewAdapter(
             it.courseTitleTextView.text = transcriptList[position].courseName
             it.scoreTextView.text = transcriptList[position].score
             if (position != 0) {
-                with(itemColors[(position - 1) % 4]) {
+                with(itemColors[(position - 1) % 6]) {
                     it.courseTitleTextView.setTextColor(textColor)
                     it.scoreTextView.setTextColor(textColor)
                     it.transcriptItem.setCardBackgroundColor(cardViewColor)

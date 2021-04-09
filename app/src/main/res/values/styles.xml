@@ -20,6 +20,7 @@
         <item name="android:layout_marginEnd">16dp</item>
     </style>
     <style name="ThemeOverlay.Curriculum.AppWidgetContainer" parent="">
-        <item name="appWidgetTextColor">@color/colorBlack</item>
+        <item name="appWidgetLayoutColor">@android:color/white</item>
+        <item name="appWidgetTextColor">@android:color/black</item>
     </style>
 </resources>
